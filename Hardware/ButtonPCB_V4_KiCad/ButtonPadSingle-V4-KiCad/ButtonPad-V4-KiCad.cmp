@@ -1,0 +1,31 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 12/8/2013 10:08:02 AM
+
+BeginCmp
+TimeStamp = /52A486EC;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = Kingbright-APTR;
+EndCmp
+
+BeginCmp
+TimeStamp = /52A48740;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = Kingbright-APTR;
+EndCmp
+
+BeginCmp
+TimeStamp = /528E6CD7;
+Reference = J1;
+ValeurCmp = HEADER_4;
+IdModule  = Connect:SIL-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /528E6CEB;
+Reference = J2;
+ValeurCmp = HEADER_4;
+IdModule  = Connect:SIL-4;
+EndCmp
+
+EndListe

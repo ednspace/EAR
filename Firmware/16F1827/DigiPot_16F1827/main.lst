@@ -1,0 +1,884 @@
+CCS PCM C Compiler, Version 4.128, 51913               21-Dec-13 12:34
+
+               Filename: C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\DigiPot-V1\main.lst
+
+               ROM used: 600 words (15%)
+                         Largest free fragment is 2048
+               RAM used: 10 (3%) at main() level
+                         26 (7%) worst case
+               Stack:    2 locations
+
+*
+0000:  MOVLP  00
+0001:  GOTO   186
+0002:  NOP
+.................... //Capture Code 
+.................... //Last Update ====>Saturday Feb 2012 
+.................... #include <16F1827.h> 
+.................... //////// Standard Header file for the PIC16F1827 device //////////////// 
+.................... #device PIC16F1827 
+.................... #list 
+....................  
+.................... #include <MCP4461.h> 
+.................... #ifndef MCP4461_H 
+.................... #define MCP4461_H 
+....................  
+.................... //#include <inttypes.h> 
+....................  
+.................... #define DEFAULT_ADDRESS 0x2C //With A0 and A1 grounded 
+.................... #define DEFAULT_WIPER_VALUE 0x80 //Default to the wipers in midrange 
+....................  
+.................... // meory addresses (all shifted 4 bits left) 
+.................... //For all the Wipers 0x100 = Full scale, 0x80 = mid scale, 0x0 = Zero scale 
+.................... #define MCP4461_VW0 0x00 
+.................... #define MCP4461_VW1 0x10 
+.................... #define MCP4461_NVW0 0x20 
+.................... #define MCP4461_NVW1 0x30 
+.................... //TCON0: D8: Reserved D7:R1HW D6: R1A D5:R1W D4:R1B D3:R0HW D2:R0A D1:R0W D0: R0B 
+.................... #define MCP4461_TCON0 0x40 
+.................... //STATUS: D8:D7: Reserved D6: WL3 D5:WL2 D4:EEWA D3:WL1 D2:WL0 D1:Reserved D0: WP 
+.................... #define MCP4461_STATUS 0x50 
+.................... #define MCP4461_VW2 0x60 
+.................... #define MCP4461_VW3 0x70 
+.................... #define MCP4461_NVW2 0x80 
+.................... #define MCP4461_NVW3 0x90 
+.................... //TCON0: D8: Reserved D7:R3HW D6: R3A D5:R3W D4:R3B D3:R2HW D2:R2A D1:R2W D0: R2B 
+.................... #define MCP4461_TCON1 0xA0 
+....................  
+.................... //control commands 
+.................... #define MCP4461_WRITE 0x0 
+.................... #define MCP4461_INCREMENT 0x4 //01 left shift by 2 
+.................... #define MCP4461_DECREMENT 0x8 //10 left shift by 2 
+.................... #define MCP4461_READ 0xC //11 left shift by 2 
+....................  
+....................  
+....................  
+.................... //#use delay(clock=12000000) 
+.................... #DEVICE ADC=8 
+.................... #use delay(clock=8000000) 
+*
+000E:  MOVLW  20
+000F:  MOVWF  05
+0010:  MOVLW  07
+0011:  MOVWF  04
+0012:  MOVF   00,W
+0013:  BTFSC  03.2
+0014:  GOTO   022
+0015:  MOVLW  02
+0016:  MOVWF  78
+0017:  CLRF   77
+0018:  DECFSZ 77,F
+0019:  GOTO   018
+001A:  DECFSZ 78,F
+001B:  GOTO   017
+001C:  MOVLW  97
+001D:  MOVWF  77
+001E:  DECFSZ 77,F
+001F:  GOTO   01E
+0020:  DECFSZ 00,F
+0021:  GOTO   015
+0022:  RETURN
+.................... #fuses NOWDT,INTRC_IO, NOPROTECT, NOBROWNOUT, NOMCLR, NOCPD, PUT, NOIESO, NOFCMEN, PLL_SW 
+....................  
+....................  
+....................  
+.................... //Turn me on for RS232 stuffs 
+.................... #use rs232(baud=19200,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,bits=8,UART1) 
+....................  
+.................... //Turn me on for I2C stuffs 
+.................... #use i2c(master, sda=PIN_B1, scl=PIN_B4) 
+*
+00B1:  MOVLW  08
+00B2:  MOVWF  78
+00B3:  NOP
+00B4:  MOVLB  02
+00B5:  BCF    0D.4
+00B6:  MOVLB  01
+00B7:  BCF    0D.4
+00B8:  NOP
+00B9:  MOVLB  00
+00BA:  RLF    2A,F
+00BB:  MOVLB  02
+00BC:  BCF    0D.1
+00BD:  BTFSS  03.0
+00BE:  GOTO   0C2
+00BF:  MOVLB  01
+00C0:  BSF    0D.1
+00C1:  MOVLB  02
+00C2:  BTFSC  03.0
+00C3:  GOTO   0C7
+00C4:  MOVLB  01
+00C5:  BCF    0D.1
+00C6:  MOVLB  02
+00C7:  MOVLB  01
+00C8:  BSF    0D.4
+00C9:  MOVLB  00
+00CA:  BTFSS  0D.4
+00CB:  GOTO   0CA
+00CC:  DECFSZ 78,F
+00CD:  GOTO   0B3
+00CE:  NOP
+00CF:  MOVLB  02
+00D0:  BCF    0D.4
+00D1:  MOVLB  01
+00D2:  BCF    0D.4
+00D3:  NOP
+00D4:  BSF    0D.1
+00D5:  NOP
+00D6:  NOP
+00D7:  BSF    0D.4
+00D8:  MOVLB  00
+00D9:  BTFSS  0D.4
+00DA:  GOTO   0D9
+00DB:  CLRF   78
+00DC:  NOP
+00DD:  BTFSC  0D.1
+00DE:  BSF    78.0
+00DF:  MOVLB  02
+00E0:  BCF    0D.4
+00E1:  MOVLB  01
+00E2:  BCF    0D.4
+00E3:  MOVLB  02
+00E4:  BCF    0D.1
+00E5:  MOVLB  01
+00E6:  BCF    0D.1
+00E7:  MOVLB  00
+00E8:  RETURN
+....................  
+.................... //Define the Addresses 
+.................... #define MCP4461_Address 0x58 
+.................... //#define TCA9555_Address 0x40; 
+....................  
+....................  
+.................... //Bring in the library for TCA9555 basically a few functions 
+....................  
+.................... #include <TCA9555.c> 
+.................... /* 
+.................... * TCA9555 Library 
+.................... * Kerry D. Wong 
+.................... * http://www.kerrywong.com 
+.................... * 3/2011 
+.................... * 
+.................... * 
+.................... * adapted for CCSC compiler 
+.................... * 11/2013 
+.................... * Eric Daine 
+.................... */ 
+....................  
+.................... #include <TCA9555.h> 
+.................... /* 
+.................... * TCA9555 Library 
+.................... * Kerry D. Wong 
+.................... * http://www.kerrywong.com 
+.................... * 3/2011 
+.................... * 
+.................... * 
+.................... * Eric Daine 
+.................... * adapted for CCSC compiler 
+.................... * removed C++ class structure 
+.................... * changed from the wiring library to CCSC I2C 
+.................... * 11/2013 
+.................... */ 
+....................  
+....................  
+.................... #define PORT_0 0 
+.................... #define PORT_1 1 
+....................  
+.................... #define DIR_OUTPUT 0 
+.................... #define DIR_INPUT 1 
+....................     
+.................... #define POLARITY_NORMAL 0 
+.................... #define POLARITY_INV 1 
+....................  
+.................... #define CR_IN0 0x00 
+.................... #define CR_IN1 0x01 
+.................... #define CR_OUT0 0x02 
+.................... #define CR_OUT1 0x03 
+.................... #define CR_INV0 0x04 
+.................... #define CR_INV1 0x05 
+.................... #define CR_CFG0 0x06 
+.................... #define CR_CFG1 0x07 
+....................  
+.................... //TCA9555(): A2(0), A1(0), A0(0) {}; 
+.................... //TCA9555(int8 a2, int8 a1, int8 a0); 
+....................  
+....................  
+.................... //Declare thy prototypes 
+....................     
+.................... void setPortDirection(int8 dir); 
+.................... void setPortDirection(int8 portNum, int8 dir); 
+.................... void setPortPolarity(int8 polarity); 
+.................... void setPortPolarity(int8 portNum, int8 polarity); 
+.................... void setOutputStates(int16 w); 
+.................... void setOutputStates(int8 portNum, int8 b); 
+....................     
+.................... int16 getInputStates(); 
+.................... int8 getInputStates(int8 portNum); 
+....................  
+.................... void pinMode(int8 pinNum, int8 dir); 
+....................  
+.................... //private: 
+.................... //   int8 A2, A1, A0; 
+.................... //   int8 I2CAddr; 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... int8 TCA9555_Address = 0x40; 
+....................  
+....................  
+....................  
+.................... //set port directions for both ports 
+.................... //dir: DIR_OUTPUT or DIR_INPUT 
+....................  
+.................... /* 
+.................... void setPortDirection(int8 dir) 
+.................... { 
+....................   i2c_start(); 
+....................   i2c_write(TCA9555_Address); 
+....................   i2c_write(CR_CFG0); 
+....................   i2c_write(dir); 
+....................   i2c_write(dir); 
+....................   i2c_stop();    
+.................... } 
+.................... */ 
+....................  
+.................... //portNum: PORT_0 or PORT_1 
+.................... void setPortDirection(int8 portNum, int8 dir) 
+.................... { 
+....................   i2c_start(); 
+00E9:  MOVLB  01
+00EA:  BSF    0D.1
+00EB:  NOP
+00EC:  BSF    0D.4
+00ED:  NOP
+00EE:  MOVLB  02
+00EF:  BCF    0D.1
+00F0:  MOVLB  01
+00F1:  BCF    0D.1
+00F2:  NOP
+00F3:  MOVLB  02
+00F4:  BCF    0D.4
+00F5:  MOVLB  01
+00F6:  BCF    0D.4
+....................   i2c_write(TCA9555_Address); 
+00F7:  MOVLB  00
+00F8:  MOVF   20,W
+00F9:  MOVWF  2A
+00FA:  CALL   0B1
+....................   if (portNum == PORT_0) i2c_write(CR_CFG0); 
+00FB:  MOVF   26,F
+00FC:  BTFSS  03.2
+00FD:  GOTO   102
+00FE:  MOVLW  06
+00FF:  MOVWF  2A
+0100:  CALL   0B1
+....................   else i2c_write(CR_CFG1); 
+0101:  GOTO   105
+0102:  MOVLW  07
+0103:  MOVWF  2A
+0104:  CALL   0B1
+....................   i2c_write(dir); 
+0105:  MOVF   27,W
+0106:  MOVWF  2A
+0107:  CALL   0B1
+....................   i2c_stop(); 
+0108:  MOVLB  01
+0109:  BCF    0D.1
+010A:  NOP
+010B:  BSF    0D.4
+010C:  MOVLB  00
+010D:  BTFSS  0D.4
+010E:  GOTO   10D
+010F:  NOP
+0110:  GOTO   111
+0111:  NOP
+0112:  MOVLB  01
+0113:  BSF    0D.1
+0114:  NOP
+.................... } 
+0115:  MOVLB  00
+0116:  RETURN
+....................  
+.................... //set port polarity for both ports 
+.................... //polarity: POLARITY_NORMAL or POLARITY_INV 
+.................... /* 
+.................... void setPortPolarity(byte polarity) 
+.................... { 
+....................   i2c_start(); 
+....................   i2c_write(TCA9555_Address); 
+....................   i2c_write(CR_INV0); 
+....................   i2c_write(polarity); 
+....................   i2c_write(polarity); 
+....................   i2c_stop(); 
+.................... } 
+.................... */ 
+....................  
+.................... void setPortPolarity(byte portNum, byte polarity) 
+.................... { 
+....................   i2c_start(); 
+....................   i2c_write(TCA9555_Address); 
+....................   if (portNum == PORT_0) i2c_write(CR_INV0); 
+....................   else i2c_write(CR_INV1); 
+....................   i2c_write(polarity); 
+....................   i2c_stop(); 
+.................... } 
+....................  
+.................... //set output states when both ports are used as output ports 
+.................... //w contains all 16 ports' states. 
+.................... /* 
+.................... void setOutputStates(int16 w) 
+.................... { 
+....................   int8 low_byte = w & 0xff; 
+....................   int8 high_byte = (w & 0xff00) >> 8; 
+....................    
+....................   i2c_start(); 
+....................   i2c_write(TCA9555_Address); 
+....................   i2c_write(CR_OUT0); 
+....................   i2c_write(low_byte); 
+....................   i2c_write(high_byte); 
+....................   i2c_stop(); 
+.................... } 
+.................... */ 
+....................  
+.................... void setOutputStates(int8 portNum, int8 b) 
+.................... { 
+....................   i2c_start(); 
+0117:  MOVLB  01
+0118:  BSF    0D.1
+0119:  NOP
+011A:  BSF    0D.4
+011B:  NOP
+011C:  MOVLB  02
+011D:  BCF    0D.1
+011E:  MOVLB  01
+011F:  BCF    0D.1
+0120:  NOP
+0121:  MOVLB  02
+0122:  BCF    0D.4
+0123:  MOVLB  01
+0124:  BCF    0D.4
+....................   i2c_write(TCA9555_Address); 
+0125:  MOVLB  00
+0126:  MOVF   20,W
+0127:  MOVWF  2A
+0128:  CALL   0B1
+....................   if (portNum == PORT_0) i2c_write(CR_OUT0); 
+0129:  MOVF   26,F
+012A:  BTFSS  03.2
+012B:  GOTO   130
+012C:  MOVLW  02
+012D:  MOVWF  2A
+012E:  CALL   0B1
+....................   else i2c_write(CR_OUT1); 
+012F:  GOTO   133
+0130:  MOVLW  03
+0131:  MOVWF  2A
+0132:  CALL   0B1
+....................   i2c_write(b); 
+0133:  MOVF   27,W
+0134:  MOVWF  2A
+0135:  CALL   0B1
+....................   i2c_stop(); 
+0136:  MOVLB  01
+0137:  BCF    0D.1
+0138:  NOP
+0139:  BSF    0D.4
+013A:  MOVLB  00
+013B:  BTFSS  0D.4
+013C:  GOTO   13B
+013D:  NOP
+013E:  GOTO   13F
+013F:  NOP
+0140:  MOVLB  01
+0141:  BSF    0D.1
+0142:  NOP
+.................... } 
+0143:  MOVLB  00
+0144:  RETURN
+....................  
+.................... //returns the input states of both ports when ports 
+.................... //are used as inputs 
+.................... //This is out for now until I figure out how Wire.requestFrom and Wire.available  
+.................... //maps to the CCSC code for now I don't so much need this function urk! 
+....................  
+.................... /* 
+.................... int16 getInputStates() 
+.................... { 
+....................   byte low_byte, high_byte; 
+....................    
+....................   i2c_start(); 
+....................   i2c_write(TCA9555_Address); 
+....................   Wire.requestFrom(TCA9555_Address, 2u); 
+....................  
+....................   while (!Wire.available()) {}; 
+....................   low_byte = Wire.receive(); 
+....................   while (!Wire.available()) {}; 
+....................   high_byte = Wire.receive(); 
+....................  
+....................   i2c_stop(); 
+....................    
+....................   int16 w = low_byte | (high_byte << 8); 
+....................    
+....................   return w; 
+.................... } 
+.................... */ 
+....................  
+.................... byte getInputStates(byte portNum) 
+.................... { 
+....................   int16 w = getInputStates(); 
+....................    
+....................   if (portNum == PORT_0) return w & 0xff; 
+....................   else return (w & 0xff00) >> 8; 
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... //Variable Declaration 
+.................... int8 count; 
+.................... int8 Pot1,Pot2,Pot3; 
+....................  
+....................  
+.................... //******************************************************************************** 
+.................... //Functions 
+.................... //******************************************************************************** 
+....................  
+.................... // This function writes the slave address to the i2c bus. 
+.................... // If a slave chip is at that address, it should respond to 
+.................... // this with an "ACK".   This function returns TRUE if an 
+.................... // ACK was found.  Otherwise it returns FALSE. 
+.................... int8 get_ack_status(int8 address) 
+.................... { 
+.................... int8 status; 
+....................  
+.................... i2c_start(); 
+.................... status = i2c_write(address);  // Status = 0 if got an ACK 
+.................... i2c_stop(); 
+....................  
+.................... if(status == 0) 
+....................    return(TRUE); 
+.................... else 
+....................    return(FALSE); 
+.................... }  
+....................  
+....................  
+.................... //This function updates the volatile wiper value of one of the four pots 
+.................... //Volatile 
+.................... void setVolatileWiper(int8 wiper, int8 wiper_value){ 
+0145:  MOVF   27,W
+0146:  MOVWF  28
+0147:  CLRF   29
+....................   int8 d_byte = wiper_value; 
+....................   int8 c_byte = 0; 
+....................   switch (wiper) { 
+0148:  MOVF   26,W
+0149:  BTFSC  03.2
+014A:  GOTO   155
+014B:  XORLW  01
+014C:  BTFSC  03.2
+014D:  GOTO   156
+014E:  XORLW  03
+014F:  BTFSC  03.2
+0150:  GOTO   158
+0151:  XORLW  01
+0152:  BTFSC  03.2
+0153:  GOTO   15B
+0154:  GOTO   15E
+....................       case 0: 
+....................         c_byte |= MCP4461_VW0; 
+....................         break; 
+0155:  GOTO   15F
+....................       case 1: 
+....................         c_byte |= MCP4461_VW1; 
+0156:  BSF    29.4
+....................         break; 
+0157:  GOTO   15F
+....................       case 2: 
+....................         c_byte |= MCP4461_VW2; 
+0158:  MOVLW  60
+0159:  IORWF  29,F
+....................         break; 
+015A:  GOTO   15F
+....................       case 3: 
+....................         c_byte |= MCP4461_VW3; 
+015B:  MOVLW  70
+015C:  IORWF  29,F
+....................         break; 
+015D:  GOTO   15F
+....................       default: 
+....................         break; //not a valid wiper 
+015E:  GOTO   15F
+....................   } 
+....................   c_byte |= MCP4461_WRITE; 
+....................    
+....................   //send command byte 
+....................   i2c_start(); 
+015F:  MOVLB  01
+0160:  BSF    0D.1
+0161:  NOP
+0162:  BSF    0D.4
+0163:  NOP
+0164:  MOVLB  02
+0165:  BCF    0D.1
+0166:  MOVLB  01
+0167:  BCF    0D.1
+0168:  NOP
+0169:  MOVLB  02
+016A:  BCF    0D.4
+016B:  MOVLB  01
+016C:  BCF    0D.4
+....................   i2c_write(MCP4461_Address); 
+016D:  MOVLW  58
+016E:  MOVLB  00
+016F:  MOVWF  2A
+0170:  CALL   0B1
+....................   i2c_write(c_byte); 
+0171:  MOVF   29,W
+0172:  MOVWF  2A
+0173:  CALL   0B1
+....................   i2c_write(d_byte); 
+0174:  MOVF   28,W
+0175:  MOVWF  2A
+0176:  CALL   0B1
+....................   i2c_stop(); 
+0177:  MOVLB  01
+0178:  BCF    0D.1
+0179:  NOP
+017A:  BSF    0D.4
+017B:  MOVLB  00
+017C:  BTFSS  0D.4
+017D:  GOTO   17C
+017E:  NOP
+017F:  GOTO   180
+0180:  NOP
+0181:  MOVLB  01
+0182:  BSF    0D.1
+0183:  NOP
+....................  
+....................   } 
+0184:  MOVLB  00
+0185:  RETURN
+....................  
+.................... //Blinker Code for the indicator LED 
+.................... void blink(){ 
+.................... output_low(PIN_B3); 
+*
+0023:  MOVLB  01
+0024:  BCF    0D.3
+0025:  MOVLB  02
+0026:  BCF    0D.3
+.................... delay_ms(250); 
+0027:  MOVLW  FA
+0028:  MOVLB  00
+0029:  MOVWF  27
+002A:  CALL   00E
+.................... output_high(PIN_B3); 
+002B:  MOVLB  01
+002C:  BCF    0D.3
+002D:  MOVLB  02
+002E:  BSF    0D.3
+.................... delay_ms(100); 
+002F:  MOVLW  64
+0030:  MOVLB  00
+0031:  MOVWF  27
+0032:  CALL   00E
+.................... } 
+0033:  MOVLP  00
+0034:  GOTO   1C1 (RETURN)
+....................  
+.................... void main(){ 
+*
+0186:  CLRF   05
+0187:  CLRF   04
+0188:  MOVLW  1F
+0189:  ANDWF  03,F
+018A:  MOVLB  02
+018B:  BSF    1E.0
+018C:  BSF    1D.7
+018D:  MOVLW  19
+018E:  MOVLB  03
+018F:  MOVWF  1B
+0190:  MOVLW  A6
+0191:  MOVWF  1E
+0192:  MOVLW  90
+0193:  MOVWF  1D
+0194:  MOVLW  40
+0195:  MOVLB  00
+0196:  MOVWF  20
+0197:  MOVLB  03
+0198:  CLRF   0C
+0199:  CLRF   0D
+019A:  MOVLB  02
+019B:  CLRF   12
+019C:  CLRF   11
+019D:  CLRF   14
+019E:  CLRF   13
+.................... setup_timer_0(RTCC_INTERNAL|RTCC_DIV_256); 
+019F:  MOVLB  01
+01A0:  MOVF   15,W
+01A1:  ANDLW  C0
+01A2:  IORLW  07
+01A3:  MOVWF  15
+.................... setup_timer_1(T1_INTERNAL ); 
+01A4:  MOVLW  05
+01A5:  MOVLB  00
+01A6:  MOVWF  18
+01A7:  CLRF   19
+.................... setup_oscillator (OSC_8MHZ); 
+01A8:  MOVLW  70
+01A9:  MOVLB  01
+01AA:  MOVWF  19
+.................... setup_adc_ports(sAN2|sAN3|sAN4|VSS_VDD); 
+01AB:  BCF    1E.0
+01AC:  BCF    1E.1
+01AD:  BCF    1E.2
+01AE:  MOVLW  1C
+01AF:  MOVLB  03
+01B0:  MOVWF  0C
+01B1:  MOVLW  00
+01B2:  MOVWF  0D
+.................... setup_adc(ADC_CLOCK_INTERNAL); 
+01B3:  MOVLB  01
+01B4:  BSF    1E.4
+01B5:  BSF    1E.5
+01B6:  BCF    1E.6
+01B7:  BCF    1E.7
+01B8:  BSF    1D.0
+.................... setup_comparator(NC_NC_NC_NC); 
+01B9:  MOVLB  02
+01BA:  CLRF   12
+01BB:  CLRF   11
+01BC:  CLRF   14
+01BD:  CLRF   13
+.................... setup_vref(FALSE); 
+01BE:  CLRF   17
+....................  
+....................  
+.................... blink();//PowerGood blinker 
+01BF:  MOVLB  00
+01C0:  GOTO   023
+.................... //Main loop starts here... 
+.................... int8 count; 
+.................... count = 0; 
+01C1:  CLRF   25
+....................  
+.................... //Now set up both ports on the shift register pin directions for outputs 
+.................... printf("TCA9555_Address %X \n\r" , TCA9555_Address); 
+01C2:  MOVLW  03
+01C3:  MOVLB  03
+01C4:  MOVWF  11
+01C5:  MOVLW  00
+01C6:  MOVWF  12
+01C7:  BCF    03.0
+01C8:  MOVLW  10
+01C9:  MOVLB  00
+01CA:  MOVWF  26
+01CB:  GOTO   035
+01CC:  MOVF   20,W
+01CD:  MOVWF  26
+01CE:  MOVLW  37
+01CF:  MOVWF  27
+01D0:  GOTO   089
+01D1:  MOVLW  20
+01D2:  BTFSS  11.4
+01D3:  GOTO   1D2
+01D4:  MOVLB  03
+01D5:  MOVWF  1A
+01D6:  MOVLW  0A
+01D7:  MOVLB  00
+01D8:  BTFSS  11.4
+01D9:  GOTO   1D8
+01DA:  MOVLB  03
+01DB:  MOVWF  1A
+01DC:  MOVLW  0D
+01DD:  MOVLB  00
+01DE:  BTFSS  11.4
+01DF:  GOTO   1DE
+01E0:  MOVLB  03
+01E1:  MOVWF  1A
+.................... setPortDirection(PORT_0,DIR_OUTPUT); 
+01E2:  MOVLB  00
+01E3:  CLRF   26
+01E4:  CLRF   27
+01E5:  CALL   0E9
+.................... setPortDirection(PORT_1,DIR_OUTPUT); 
+01E6:  MOVLW  01
+01E7:  MOVWF  26
+01E8:  CLRF   27
+01E9:  CALL   0E9
+....................  
+.................... while(1){ 
+....................  
+....................  
+.................... //Now turn on some frigging LEDS 
+.................... //setOutputStates(1<<8 | 3); 
+.................... setOutputStates(PORT_0,0xFF); 
+01EA:  CLRF   26
+01EB:  MOVLW  FF
+01EC:  MOVWF  27
+01ED:  CALL   117
+.................... setOutputStates(PORT_1,0x00); 
+01EE:  MOVLW  01
+01EF:  MOVWF  26
+01F0:  CLRF   27
+01F1:  CALL   117
+....................  
+.................... delay_ms(500); 
+01F2:  MOVLW  02
+01F3:  MOVWF  26
+01F4:  MOVLW  FA
+01F5:  MOVWF  27
+01F6:  CALL   00E
+01F7:  DECFSZ 26,F
+01F8:  GOTO   1F4
+....................  
+.................... setOutputStates(PORT_0,0x00); 
+01F9:  CLRF   26
+01FA:  CLRF   27
+01FB:  CALL   117
+.................... setOutputStates(PORT_1,0xFF); 
+01FC:  MOVLW  01
+01FD:  MOVWF  26
+01FE:  MOVLW  FF
+01FF:  MOVWF  27
+0200:  CALL   117
+....................  
+.................... delay_ms(500); 
+0201:  MOVLW  02
+0202:  MOVWF  26
+0203:  MOVLW  FA
+0204:  MOVWF  27
+0205:  CALL   00E
+0206:  DECFSZ 26,F
+0207:  GOTO   203
+....................  
+....................  
+....................  
+.................... } 
+0208:  GOTO   1EA
+....................  
+.................... while(1){ 
+.................... set_adc_channel(2); 
+0209:  MOVLW  08
+020A:  MOVWF  78
+020B:  MOVLB  01
+020C:  MOVF   1D,W
+020D:  ANDLW  83
+020E:  IORWF  78,W
+020F:  MOVWF  1D
+.................... delay_us(20);  //a small delay is required after setting the channel 
+0210:  MOVLW  0D
+0211:  MOVWF  77
+0212:  DECFSZ 77,F
+0213:  GOTO   212
+.................... Pot1=read_adc(); 
+0214:  BSF    1D.1
+0215:  MOVLW  02
+0216:  MOVWF  77
+0217:  BTFSS  1D.1
+0218:  GOTO   21B
+0219:  DECFSZ 77,F
+021A:  GOTO   217
+021B:  MOVF   1C,W
+021C:  MOVLB  00
+021D:  MOVWF  22
+.................... setVolatileWiper(0, Pot1); 
+021E:  CLRF   26
+021F:  MOVF   22,W
+0220:  MOVWF  27
+0221:  CALL   145
+....................  
+.................... set_adc_channel(3); 
+0222:  MOVLW  0C
+0223:  MOVWF  78
+0224:  MOVLB  01
+0225:  MOVF   1D,W
+0226:  ANDLW  83
+0227:  IORWF  78,W
+0228:  MOVWF  1D
+.................... delay_us(20);  //a small delay is required after setting the channel 
+0229:  MOVLW  0D
+022A:  MOVWF  77
+022B:  DECFSZ 77,F
+022C:  GOTO   22B
+.................... Pot2=read_adc(); 
+022D:  BSF    1D.1
+022E:  MOVLW  02
+022F:  MOVWF  77
+0230:  BTFSS  1D.1
+0231:  GOTO   234
+0232:  DECFSZ 77,F
+0233:  GOTO   230
+0234:  MOVF   1C,W
+0235:  MOVLB  00
+0236:  MOVWF  23
+.................... setVolatileWiper(1, Pot2); 
+0237:  MOVLW  01
+0238:  MOVWF  26
+0239:  MOVF   23,W
+023A:  MOVWF  27
+023B:  CALL   145
+....................  
+.................... set_adc_channel(4); 
+023C:  MOVLW  10
+023D:  MOVWF  78
+023E:  MOVLB  01
+023F:  MOVF   1D,W
+0240:  ANDLW  83
+0241:  IORWF  78,W
+0242:  MOVWF  1D
+.................... delay_us(20);  //a small delay is required after setting the channel 
+0243:  MOVLW  0D
+0244:  MOVWF  77
+0245:  DECFSZ 77,F
+0246:  GOTO   245
+.................... Pot3=read_adc(); 
+0247:  BSF    1D.1
+0248:  MOVLW  02
+0249:  MOVWF  77
+024A:  BTFSS  1D.1
+024B:  GOTO   24E
+024C:  DECFSZ 77,F
+024D:  GOTO   24A
+024E:  MOVF   1C,W
+024F:  MOVLB  00
+0250:  MOVWF  24
+.................... setVolatileWiper(2, Pot3); 
+0251:  MOVLW  02
+0252:  MOVWF  26
+0253:  MOVF   24,W
+0254:  MOVWF  27
+0255:  CALL   145
+....................   
+....................  
+....................  
+.................... //printf("Pot1: %3u \n\r" , Pot1); 
+.................... //printf("Pot2: %3u \n\r" , Pot2); 
+.................... //printf("Pot3: %3u \n\r" , Pot3); 
+....................    
+.................... } 
+0256:  GOTO   209
+.................... } 
+....................  
+....................     
+....................     
+....................     
+....................     
+....................     
+....................     
+....................    
+....................     
+....................  
+....................  
+0257:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0984   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD NOBROWNOUT NOCLKOUT NOIESO NOFCMEN
+   Word  2: 1EFF   NOWRT PLL_SW STVREN BORV19 NODEBUG NOLVP

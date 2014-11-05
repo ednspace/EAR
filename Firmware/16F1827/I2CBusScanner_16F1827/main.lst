@@ -1,0 +1,421 @@
+CCS PCM C Compiler, Version 4.128, 51913               21-Dec-13 12:29
+
+               Filename: C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\I2CBusScanner\main.lst
+
+               ROM used: 606 words (15%)
+                         Largest free fragment is 2048
+               RAM used: 13 (3%) at main() level
+                         31 (8%) worst case
+               Stack:    2 locations
+
+*
+0000:  MOVLP  00
+0001:  GOTO   1CE
+0002:  NOP
+.................... //Capture Code 
+.................... //Last Update ====>Saturday Feb 2012 
+.................... #include <16F1827.h> 
+.................... //////// Standard Header file for the PIC16F1827 device //////////////// 
+.................... #device PIC16F1827 
+.................... #list 
+....................  
+.................... //#use delay(clock=12000000) 
+.................... #use delay(clock=8000000) 
+*
+0029:  MOVLW  20
+002A:  MOVWF  05
+002B:  MOVLW  0C
+002C:  MOVWF  04
+002D:  MOVF   00,W
+002E:  BTFSC  03.2
+002F:  GOTO   03D
+0030:  MOVLW  02
+0031:  MOVWF  78
+0032:  CLRF   77
+0033:  DECFSZ 77,F
+0034:  GOTO   033
+0035:  DECFSZ 78,F
+0036:  GOTO   032
+0037:  MOVLW  97
+0038:  MOVWF  77
+0039:  DECFSZ 77,F
+003A:  GOTO   039
+003B:  DECFSZ 00,F
+003C:  GOTO   030
+003D:  RETURN
+.................... #fuses NOWDT,INTRC_IO, NOPROTECT, NOBROWNOUT, NOMCLR, NOCPD, PUT, NOIESO, NOFCMEN, PLL_SW 
+.................... //#fuses NOWDT,ECH, NOCLKOUT, NOPROTECT, NOBROWNOUT, NOMCLR, NOCPD, PUT, NOIESO, NOFCMEN, PLL_SW 
+....................  
+.................... //Turn me on for RS232 stuffs 
+.................... #use rs232(baud=19200,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,bits=8,UART1) 
+....................  
+.................... //Turn me on for I2C stuffs 
+.................... #use i2c(master, sda=PIN_B1, scl=PIN_B4) 
+*
+00AC:  MOVLW  08
+00AD:  MOVWF  78
+00AE:  NOP
+00AF:  MOVLB  02
+00B0:  BCF    0D.4
+00B1:  MOVLB  01
+00B2:  BCF    0D.4
+00B3:  NOP
+00B4:  MOVLB  00
+00B5:  RLF    2D,F
+00B6:  MOVLB  02
+00B7:  BCF    0D.1
+00B8:  BTFSS  03.0
+00B9:  GOTO   0BD
+00BA:  MOVLB  01
+00BB:  BSF    0D.1
+00BC:  MOVLB  02
+00BD:  BTFSC  03.0
+00BE:  GOTO   0C2
+00BF:  MOVLB  01
+00C0:  BCF    0D.1
+00C1:  MOVLB  02
+00C2:  MOVLB  01
+00C3:  BSF    0D.4
+00C4:  MOVLB  00
+00C5:  BTFSS  0D.4
+00C6:  GOTO   0C5
+00C7:  DECFSZ 78,F
+00C8:  GOTO   0AE
+00C9:  NOP
+00CA:  MOVLB  02
+00CB:  BCF    0D.4
+00CC:  MOVLB  01
+00CD:  BCF    0D.4
+00CE:  NOP
+00CF:  BSF    0D.1
+00D0:  NOP
+00D1:  NOP
+00D2:  BSF    0D.4
+00D3:  MOVLB  00
+00D4:  BTFSS  0D.4
+00D5:  GOTO   0D4
+00D6:  CLRF   78
+00D7:  NOP
+00D8:  BTFSC  0D.1
+00D9:  BSF    78.0
+00DA:  MOVLB  02
+00DB:  BCF    0D.4
+00DC:  MOVLB  01
+00DD:  BCF    0D.4
+00DE:  MOVLB  02
+00DF:  BCF    0D.1
+00E0:  MOVLB  01
+00E1:  BCF    0D.1
+.................... //#define Device_SDA PIN_B1 
+.................... //#define Device_SLC PIN_B4 
+....................  
+....................  
+.................... //Define Read and Write Address 
+.................... //#define I2C_ADDR_W   0x90 
+.................... //#define I2C_ADDR_R   0x91 
+....................  
+.................... //Variable Declaration 
+.................... int8 high_byte,low_byte,i,count; 
+.................... int16 timer_hold,reading; 
+....................  
+....................  
+.................... //******************************************************************************** 
+.................... //Functions 
+.................... //******************************************************************************** 
+....................  
+.................... // This function writes the slave address to the i2c bus. 
+.................... // If a slave chip is at that address, it should respond to 
+.................... // this with an "ACK".   This function returns TRUE if an 
+.................... // ACK was found.  Otherwise it returns FALSE. 
+.................... int8 get_ack_status(int8 address) 
+.................... { 
+.................... int8 status; 
+....................  
+.................... i2c_start(); 
+*
+009B:  MOVLB  01
+009C:  BSF    0D.1
+009D:  NOP
+009E:  BSF    0D.4
+009F:  NOP
+00A0:  MOVLB  02
+00A1:  BCF    0D.1
+00A2:  MOVLB  01
+00A3:  BCF    0D.1
+00A4:  NOP
+00A5:  MOVLB  02
+00A6:  BCF    0D.4
+00A7:  MOVLB  01
+00A8:  BCF    0D.4
+.................... status = i2c_write(address);  // Status = 0 if got an ACK 
+00A9:  MOVLB  00
+00AA:  MOVF   2B,W
+00AB:  MOVWF  2D
+*
+00E2:  MOVF   78,W
+00E3:  MOVLB  00
+00E4:  MOVWF  2C
+.................... i2c_stop(); 
+00E5:  MOVLB  01
+00E6:  BCF    0D.1
+00E7:  NOP
+00E8:  BSF    0D.4
+00E9:  MOVLB  00
+00EA:  BTFSS  0D.4
+00EB:  GOTO   0EA
+00EC:  NOP
+00ED:  GOTO   0EE
+00EE:  NOP
+00EF:  MOVLB  01
+00F0:  BSF    0D.1
+00F1:  NOP
+....................  
+.................... if(status == 0) 
+00F2:  MOVLB  00
+00F3:  MOVF   2C,F
+00F4:  BTFSS  03.2
+00F5:  GOTO   0FA
+....................    return(TRUE); 
+00F6:  MOVLW  01
+00F7:  MOVWF  78
+00F8:  GOTO   0FD
+.................... else 
+00F9:  GOTO   0FD
+....................    return(FALSE); 
+00FA:  MOVLW  00
+00FB:  MOVWF  78
+00FC:  GOTO   0FD
+.................... }  
+00FD:  MOVLP  00
+00FE:  GOTO   218 (RETURN)
+....................  
+.................... //Blinker Code for the indicator LED 
+.................... void blink(){ 
+.................... output_low(PIN_B3); 
+*
+003E:  MOVLB  01
+003F:  BCF    0D.3
+0040:  MOVLB  02
+0041:  BCF    0D.3
+.................... delay_ms(250); 
+0042:  MOVLW  FA
+0043:  MOVLB  00
+0044:  MOVWF  2C
+0045:  CALL   029
+.................... output_high(PIN_B3); 
+0046:  MOVLB  01
+0047:  BCF    0D.3
+0048:  MOVLB  02
+0049:  BSF    0D.3
+.................... delay_ms(100); 
+004A:  MOVLW  64
+004B:  MOVLB  00
+004C:  MOVWF  2C
+004D:  CALL   029
+.................... } 
+004E:  MOVLP  00
+004F:  GOTO   200 (RETURN)
+....................  
+.................... void main(){ 
+*
+01CE:  CLRF   05
+01CF:  CLRF   04
+01D0:  MOVLW  1F
+01D1:  ANDWF  03,F
+01D2:  MOVLB  02
+01D3:  BSF    1E.0
+01D4:  BSF    1D.7
+01D5:  MOVLW  19
+01D6:  MOVLB  03
+01D7:  MOVWF  1B
+01D8:  MOVLW  A6
+01D9:  MOVWF  1E
+01DA:  MOVLW  90
+01DB:  MOVWF  1D
+01DC:  CLRF   0C
+01DD:  CLRF   0D
+01DE:  MOVLB  02
+01DF:  CLRF   12
+01E0:  CLRF   11
+01E1:  CLRF   14
+01E2:  CLRF   13
+.................... setup_timer_0(RTCC_INTERNAL|RTCC_DIV_256); 
+01E3:  MOVLB  01
+01E4:  MOVF   15,W
+01E5:  ANDLW  C0
+01E6:  IORLW  07
+01E7:  MOVWF  15
+.................... setup_timer_1(T1_INTERNAL ); 
+01E8:  MOVLW  05
+01E9:  MOVLB  00
+01EA:  MOVWF  18
+01EB:  CLRF   19
+.................... setup_oscillator (OSC_8MHZ); 
+01EC:  MOVLW  70
+01ED:  MOVLB  01
+01EE:  MOVWF  19
+.................... setup_adc_ports(NO_ANALOGS|VSS_VDD); 
+01EF:  BCF    1E.0
+01F0:  BCF    1E.1
+01F1:  BCF    1E.2
+01F2:  MOVLW  00
+01F3:  MOVLB  03
+01F4:  MOVWF  0C
+01F5:  MOVWF  0D
+.................... setup_adc(ADC_OFF); 
+01F6:  MOVLB  01
+01F7:  BCF    1D.0
+.................... setup_comparator(NC_NC_NC_NC); 
+01F8:  MOVLB  02
+01F9:  CLRF   12
+01FA:  CLRF   11
+01FB:  CLRF   14
+01FC:  CLRF   13
+.................... setup_vref(FALSE); 
+01FD:  CLRF   17
+....................  
+....................  
+.................... blink();//PowerGood blinker 
+01FE:  MOVLB  00
+01FF:  GOTO   03E
+.................... //Main loop starts here... 
+.................... int8 i; 
+.................... int8 status; 
+.................... int8 count = 0; 
+0200:  CLRF   2A
+....................  
+.................... printf("\n\rStart:\n\r"); 
+0201:  MOVLW  03
+0202:  MOVLB  03
+0203:  MOVWF  11
+0204:  MOVLW  00
+0205:  MOVWF  12
+0206:  MOVLB  00
+0207:  CALL   050
+....................  
+.................... delay_ms(1000); 
+0208:  MOVLW  04
+0209:  MOVWF  2B
+020A:  MOVLW  FA
+020B:  MOVWF  2C
+020C:  CALL   029
+020D:  DECFSZ 2B,F
+020E:  GOTO   20A
+....................  
+.................... // Try all slave addresses from 0x10 to 0xEF. 
+.................... // See if we get a response from any slaves 
+.................... // that may be on the i2c bus. 
+.................... for(i=0x10; i < 0xF0; i+=2) 
+020F:  MOVLW  10
+0210:  MOVWF  28
+0211:  MOVF   28,W
+0212:  SUBLW  EF
+0213:  BTFSS  03.0
+0214:  GOTO   242
+....................    { 
+....................     status = get_ack_status(i); 
+0215:  MOVF   28,W
+0216:  MOVWF  2B
+0217:  GOTO   09B
+0218:  MOVF   78,W
+0219:  MOVWF  29
+....................     if(status == TRUE) 
+021A:  DECFSZ 29,W
+021B:  GOTO   23F
+....................       {  
+....................        printf("ACK addr: %X\n\r", i); 
+021C:  MOVLW  09
+021D:  MOVLB  03
+021E:  MOVWF  11
+021F:  MOVLW  00
+0220:  MOVWF  12
+0221:  BCF    03.0
+0222:  MOVLW  0A
+0223:  MOVLB  00
+0224:  MOVWF  2B
+0225:  CALL   0FF
+0226:  MOVF   28,W
+0227:  MOVWF  2B
+0228:  MOVLW  37
+0229:  MOVWF  2C
+022A:  GOTO   152
+022B:  MOVLW  0A
+022C:  BTFSS  11.4
+022D:  GOTO   22C
+022E:  MOVLB  03
+022F:  MOVWF  1A
+0230:  MOVLW  0D
+0231:  MOVLB  00
+0232:  BTFSS  11.4
+0233:  GOTO   232
+0234:  MOVLB  03
+0235:  MOVWF  1A
+....................        count++; 
+0236:  MOVLB  00
+0237:  INCF   2A,F
+....................        delay_ms(2000); 
+0238:  MOVLW  08
+0239:  MOVWF  2B
+023A:  MOVLW  FA
+023B:  MOVWF  2C
+023C:  CALL   029
+023D:  DECFSZ 2B,F
+023E:  GOTO   23A
+....................       } 
+....................    } 
+023F:  MOVLW  02
+0240:  ADDWF  28,F
+0241:  GOTO   211
+....................  
+.................... if(count == 0) 
+0242:  MOVF   2A,F
+0243:  BTFSS  03.2
+0244:  GOTO   24D
+....................    printf("\n\rNothing Found"); 
+0245:  MOVLW  11
+0246:  MOVLB  03
+0247:  MOVWF  11
+0248:  MOVLW  00
+0249:  MOVWF  12
+024A:  MOVLB  00
+024B:  CALL   050
+.................... else 
+024C:  GOTO   25C
+....................    printf("\n\rNumber of i2c chips found: %u", count); 
+024D:  MOVLW  19
+024E:  MOVLB  03
+024F:  MOVWF  11
+0250:  MOVLW  00
+0251:  MOVWF  12
+0252:  BCF    03.0
+0253:  MOVLW  1D
+0254:  MOVLB  00
+0255:  MOVWF  2B
+0256:  CALL   0FF
+0257:  MOVF   2A,W
+0258:  MOVWF  2B
+0259:  MOVLW  1B
+025A:  MOVWF  2C
+025B:  GOTO   18F
+....................  
+.................... while(1); 
+025C:  GOTO   25C
+.................... }   
+....................  
+....................     
+....................     
+....................     
+....................     
+....................     
+....................     
+....................    
+....................     
+....................  
+....................  
+025D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0984   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD NOBROWNOUT NOCLKOUT NOIESO NOFCMEN
+   Word  2: 1EFF   NOWRT PLL_SW STVREN BORV19 NODEBUG NOLVP

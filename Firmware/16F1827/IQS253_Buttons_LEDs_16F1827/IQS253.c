@@ -1,0 +1,94 @@
+
+
+#include <IQS253.h>
+
+
+
+int8 IQS253_Address = 0x88; //7 bit address = 44h
+// 0 = write
+// 1 = read
+
+void IQS253_Init()
+{
+  //Setup the IQS253
+  
+int8 settings[46] = {
+0xC4, 0x96, //Target ATI set to 150
+0xC5, 0x96, //Comp0
+0xC6, 0xA1, //Comp1
+0xC7, 0xB5, //Comp2
+0xC8, 0xA5, //Chan0-ATI-Base
+0xC9, 0xA5, //Chan1-ATI-Base
+0xCA, 0xA6, //Chan2-ATI-Base
+0xCB, 0x0F, //Prox-Thr-Chan0
+0xCC, 0x0F, //Prox-Thr-Chan1
+0xCD, 0x0F, //Prox-Thr-Chan2
+0xCE, 0x0D, //Touch-Thr-Chan0
+0xCF, 0x0D, //Touch-Thr-Chan1
+0xD0, 0x0D, //Touch-Thr-Chan2
+0xD1, 0x37, //Prox_Settings0
+0xD2, 0x80, //Prox_Settings1
+0xD3, 0x00, //Prox_Settings2
+0xD4, 0x00, //Prox_Settings3
+0xD5, 0x07, //Active_Chan
+0xD6, 0x00, //Low_Power
+0xD7, 0x00, //Dycal_Settings
+0xD8, 0x00, //Dycal_Chan
+0xD9, 0xC2,  //Event_Mask
+0xDD, 0x00  //Default_Comms_Pointer
+};
+
+
+  //First Make a Handshake to Bring up comms window
+   printf("Configuring IQS253  \n\r  ");
+   output_low(PIN_A1);
+   delay_ms(10);
+   output_float(PIN_A1);
+   delay_ms(1);
+   if( !input(PIN_A1))
+   {
+   
+   for (i=0; i<46; i=i+2)
+   {
+   i2c_start();
+   i2c_write(IQS253_Address);
+   i2c_write(settings[i]);
+   i2c_write(settings [i+1]);
+   
+   
+    i2c_start();
+  i2c_write(IQS253_Address);
+  i2c_write (settings[i]);
+  i2c_start();
+  i2c_write(IQS253_Address +1);
+  data = i2c_read(0);
+  printf("Register  %X,  ",settings[i]);
+  printf("Data Sent  %X  ",settings[i+1]);
+  printf("Data Got   %X\n\r  ",data);
+   }
+   i2c_stop();
+   printf("Done...  \n\r  ");
+   }
+  
+}
+
+int8 IQS253_status()
+{
+  i2c_start();
+  i2c_write(IQS253_Address);
+  i2c_write (TOUCH_STATUS);
+  i2c_start();
+  i2c_write(IQS253_Address +1);
+  data = i2c_read(0);
+  i2c_stop(); 
+  
+  return(data);
+  //while ( !input(PIN_A1)){}
+  
+  
+}
+  
+
+
+
+

@@ -1,0 +1,19 @@
+ÀÄmain
+   ÀÄMAIN  0/144  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ??0??
+      ÃÄblink  0/18  Ram=0
+      ³  ÃÄ@delay_ms1  0/21  Ram=1
+      ³  ÀÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@PSTRINGC7_19200_106_105  0/75  Ram=4
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÃÄget_ack_status  0/100  Ram=2
+      ³  ÀÄ@I2C_WRITE_1  (Inline)  Ram=1
+      ÃÄ@PSTRINGCN7_19200_106_105  0/83  Ram=5
+      ÃÄ@PRINTF_X_19200_106_105  0/40  Ram=2
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@PSTRINGC7_19200_106_105  0/75  Ram=4
+      ÃÄ@PSTRINGCN7_19200_106_105  0/83  Ram=5
+      ÀÄ@PRINTF_U_19200_106_105  0/63  Ram=2
+         ÃÄ@DIV88  0/21  Ram=3
+         ÀÄ@DIV88  0/21  Ram=3

@@ -1,0 +1,7 @@
+>>> Warning 203 "main.c" Line 98(1,1): Condition always TRUE
+>>> Warning 202 "main.c" Line 25(6,15): Variable never used:   high_byte
+>>> Warning 202 "main.c" Line 25(16,24): Variable never used:   low_byte
+>>> Warning 202 "main.c" Line 26(7,17): Variable never used:   timer_hold
+>>> Warning 202 "main.c" Line 26(18,25): Variable never used:   reading
+      Memory usage:   ROM=15%      RAM=3% - 8%
+      0 Errors,  5 Warnings.

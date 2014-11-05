@@ -1,0 +1,31 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 12/26/2013 6:50:08 PM
+
+BeginCmp
+TimeStamp = /528E6CD7;
+Reference = J1;
+ValeurCmp = HEADER_4;
+IdModule  = Connect:SIL-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /528E6CEB;
+Reference = J2;
+ValeurCmp = HEADER_4;
+IdModule  = Connect:SIL-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /528E47CF;
+Reference = LED1;
+ValeurCmp = BICOLORLED;
+IdModule  = BiColorLED;
+EndCmp
+
+BeginCmp
+TimeStamp = /528E6BB3;
+Reference = LED2;
+ValeurCmp = BICOLORLED;
+IdModule  = BiColorLED;
+EndCmp
+
+EndListe

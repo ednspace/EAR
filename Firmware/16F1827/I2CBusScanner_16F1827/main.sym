@@ -1,0 +1,112 @@
+004-005 @READ_PACKED_MEMORY.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+004-005 @WRITE_PACKED_MEMORY.P3
+004     @WRITE_PROGRAM_MEMORY8.P4
+006-007 @READ_PACKED_MEMORY.P1
+006-007 @WRITE_PACKED_MEMORY.P2
+020     high_byte
+021     low_byte
+022     i
+023     count
+024-025 timer_hold
+026-027 reading
+028     MAIN.i
+029     MAIN.status
+02A     MAIN.count
+02B     get_ack_status.address
+02B     @PRINTF_U_19200_106_105.P1
+02B     @PSTRINGCN7_19200_106_105.P2
+02B     @PRINTF_X_19200_106_105.P3
+02B     MAIN.@SCRATCH1
+02B     @PSTRINGC7_19200_106_105.@SCRATCH1
+02C     @PRINTF_U_19200_106_105.P1
+02C     @PRINTF_X_19200_106_105.P2
+02C     @delay_ms1.P3
+02C     get_ack_status.status
+02C     @PSTRINGC7_19200_106_105.@SCRATCH2
+02C     @PSTRINGCN7_19200_106_105.@SCRATCH1
+02D     @I2C_WRITE_1.P1
+02D     @DIV88.P2
+02D     @PSTRINGC7_19200_106_105.@SCRATCH3
+02D     @PSTRINGCN7_19200_106_105.@SCRATCH2
+02E     @DIV88.P1
+02E     @PSTRINGC7_19200_106_105.@SCRATCH4
+02E     @PSTRINGCN7_19200_106_105.@SCRATCH3
+02F     @PSTRINGCN7_19200_106_105.@SCRATCH4
+02F     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+111.6   C1OUT
+113.6   C2OUT
+191-192 @READ_PROGRAM_MEMORY8.P1
+191-192 @WRITE_PROGRAM_MEMORY8.P2
+291     CCP_1_LOW
+291     CCP_1
+292     CCP_1_HIGH
+298     CCP_2_LOW
+298     CCP_2
+299     CCP_2_HIGH
+311     CCP_3_LOW
+311     CCP_3
+312     CCP_3_HIGH
+318     CCP_4_LOW
+318     CCP_4
+319     CCP_4_HIGH
+
+ROM Allocation:
+0029  @delay_ms1
+00AC  @I2C_WRITE_1
+009B  get_ack_status
+003E  blink
+01CE  MAIN
+0003  @const95
+0050  @PSTRINGC7_19200_106_105
+0009  @const97
+00FF  @PSTRINGCN7_19200_106_105
+0152  @PRINTF_X_19200_106_105
+0011  @const103
+0019  @const104
+017A  @DIV88
+018F  @PRINTF_U_19200_106_105
+01CE  @cinit1
+01E3  @cinit2
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\I2CBusScanner\
+
+Project Files:
+    main.c                                                  [13-Oct-13 11:48  CRC=7D158E4E]
+    D:\Program Files (x86)\PICC\devices\16F1827.h           [01-Dec-11 14:35  CRC=B1B82A14]
+
+Source signature=E085E276
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F1827
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.STA

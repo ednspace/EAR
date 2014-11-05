@@ -1,0 +1,1331 @@
+CCS PCM C Compiler, Version 4.128, 51913               22-Feb-14 18:51
+
+               Filename: C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\IQS253\main.lst
+
+               ROM used: 1194 words (29%)
+                         Largest free fragment is 2048
+               RAM used: 13 (3%) at main() level
+                         81 (21%) worst case
+               Stack:    2 locations
+
+*
+0000:  MOVLP  00
+0001:  GOTO   377
+0002:  NOP
+.................... //IQS253 Test Code 
+.................... //Last Update ====>Jan 2014 
+.................... #include <16F1827.h> 
+.................... //////// Standard Header file for the PIC16F1827 device //////////////// 
+.................... #device PIC16F1827 
+.................... #list 
+....................  
+....................  
+....................  
+....................  
+.................... //#use delay(clock=12000000) 
+.................... #DEVICE ADC=10 
+.................... #use delay(clock=8000000) 
+*
+0092:  MOVLW  20
+0093:  MOVWF  05
+0094:  MOVLW  3C
+0095:  MOVWF  04
+0096:  MOVF   00,W
+0097:  BTFSC  03.2
+0098:  GOTO   0A6
+0099:  MOVLW  02
+009A:  MOVWF  78
+009B:  CLRF   77
+009C:  DECFSZ 77,F
+009D:  GOTO   09C
+009E:  DECFSZ 78,F
+009F:  GOTO   09B
+00A0:  MOVLW  97
+00A1:  MOVWF  77
+00A2:  DECFSZ 77,F
+00A3:  GOTO   0A2
+00A4:  DECFSZ 00,F
+00A5:  GOTO   099
+00A6:  RETURN
+.................... #fuses NOWDT,INTRC_IO, NOPROTECT, NOBROWNOUT, NOMCLR, NOCPD, PUT, NOIESO, NOFCMEN, PLL_SW 
+....................  
+....................  
+....................  
+.................... //Turn me on for RS232 stuffs 
+.................... #use rs232(baud=19200,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,xmit=PIN_B5,rcv=PIN_B2,bits=8) 
+.................... //#use rs232(baud=57600,parity=N,bits=8,UART1) 
+....................  
+.................... //Turn me on for I2C stuffs 
+.................... #use i2c(master, sda=PIN_B1, scl=PIN_B4) 
+00A7:  MOVLW  08
+00A8:  MOVWF  78
+00A9:  NOP
+00AA:  MOVLB  02
+00AB:  BCF    0D.4
+00AC:  MOVLB  01
+00AD:  BCF    0D.4
+00AE:  NOP
+00AF:  MOVLB  00
+00B0:  RLF    5D,F
+00B1:  MOVLB  02
+00B2:  BCF    0D.1
+00B3:  BTFSS  03.0
+00B4:  GOTO   0B8
+00B5:  MOVLB  01
+00B6:  BSF    0D.1
+00B7:  MOVLB  02
+00B8:  BTFSC  03.0
+00B9:  GOTO   0BD
+00BA:  MOVLB  01
+00BB:  BCF    0D.1
+00BC:  MOVLB  02
+00BD:  MOVLB  01
+00BE:  BSF    0D.4
+00BF:  MOVLB  00
+00C0:  BTFSS  0D.4
+00C1:  GOTO   0C0
+00C2:  DECFSZ 78,F
+00C3:  GOTO   0A9
+00C4:  NOP
+00C5:  MOVLB  02
+00C6:  BCF    0D.4
+00C7:  MOVLB  01
+00C8:  BCF    0D.4
+00C9:  NOP
+00CA:  BSF    0D.1
+00CB:  NOP
+00CC:  NOP
+00CD:  BSF    0D.4
+00CE:  MOVLB  00
+00CF:  BTFSS  0D.4
+00D0:  GOTO   0CF
+00D1:  CLRF   78
+00D2:  NOP
+00D3:  BTFSC  0D.1
+00D4:  BSF    78.0
+00D5:  MOVLB  02
+00D6:  BCF    0D.4
+00D7:  MOVLB  01
+00D8:  BCF    0D.4
+00D9:  MOVLB  02
+00DA:  BCF    0D.1
+00DB:  MOVLB  01
+00DC:  BCF    0D.1
+00DD:  MOVLB  00
+00DE:  RETURN
+00DF:  MOVLW  08
+00E0:  MOVWF  5D
+00E1:  MOVF   77,W
+00E2:  MOVWF  5E
+00E3:  MOVLB  01
+00E4:  BSF    0D.1
+00E5:  NOP
+00E6:  BSF    0D.4
+00E7:  MOVLB  00
+00E8:  BTFSS  0D.4
+00E9:  GOTO   0E8
+00EA:  BTFSC  0D.1
+00EB:  BSF    03.0
+00EC:  BTFSS  0D.1
+00ED:  BCF    03.0
+00EE:  RLF    78,F
+00EF:  NOP
+00F0:  MOVLB  01
+00F1:  BCF    0D.4
+00F2:  MOVLB  02
+00F3:  BCF    0D.4
+00F4:  MOVLB  00
+00F5:  DECFSZ 5D,F
+00F6:  GOTO   0E3
+00F7:  MOVLB  01
+00F8:  BSF    0D.1
+00F9:  NOP
+00FA:  MOVLB  02
+00FB:  BCF    0D.1
+00FC:  MOVLB  00
+00FD:  MOVF   5E,W
+00FE:  BTFSC  03.2
+00FF:  GOTO   103
+0100:  MOVLB  01
+0101:  BCF    0D.1
+0102:  MOVLB  00
+0103:  NOP
+0104:  MOVLB  01
+0105:  BSF    0D.4
+0106:  MOVLB  00
+0107:  BTFSS  0D.4
+0108:  GOTO   107
+0109:  NOP
+010A:  MOVLB  02
+010B:  BCF    0D.4
+010C:  MOVLB  01
+010D:  BCF    0D.4
+010E:  NOP
+010F:  MOVLB  02
+0110:  BCF    0D.1
+0111:  MOVLB  01
+0112:  BCF    0D.1
+0113:  MOVLB  00
+0114:  RETURN
+....................  
+.................... //Define the Addresses 
+.................... //#define MCP4461_Address 0x58 
+.................... //#define TCA9555_Address 0x40; 
+.................... //Variable Declaration 
+.................... int8 status,test,i,count,data,ID; 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... //******************************************************************************** 
+.................... //Functions 
+.................... //******************************************************************************** 
+.................... #include <IQS253.c> 
+....................  
+....................  
+.................... #include <IQS253.h> 
+.................... /* 
+.................... * IQS253 Library 
+.................... * Eric Daine 
+.................... * 01/2014 
+.................... */ 
+....................  
+.................... //Status Registers 
+.................... #define PRODUCT_NUMBER 0x00 
+.................... #define Device_Specific_Data 0x10 
+.................... #define TOUCH_STATUS 0x35 
+.................... #define PROX_STATUS 0x31 
+.................... #define Dycal_Touch_Status 0x36 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... int8 IQS253_Address = 0x88; //7 bit address = 44h 
+.................... // 0 = write 
+.................... // 1 = read 
+....................  
+.................... void IQS253_Init() 
+.................... { 
+....................   //Setup the IQS253 
+....................    
+.................... int8 settings[46] = { 
+.................... 0xC4, 0x96, //Target ATI set to 150 
+.................... 0xC5, 0x96, //Comp0 
+.................... 0xC6, 0xA1, //Comp1 
+.................... 0xC7, 0xB5, //Comp2 
+.................... 0xC8, 0xA5, //Chan0-ATI-Base 
+.................... 0xC9, 0xA5, //Chan1-ATI-Base 
+.................... 0xCA, 0xA6, //Chan2-ATI-Base 
+.................... 0xCB, 0x0F, //Prox-Thr-Chan0 
+.................... 0xCC, 0x0F, //Prox-Thr-Chan1 
+.................... 0xCD, 0x0F, //Prox-Thr-Chan2 
+.................... 0xCE, 0x0D, //Touch-Thr-Chan0 
+.................... 0xCF, 0x0D, //Touch-Thr-Chan1 
+.................... 0xD0, 0x0D, //Touch-Thr-Chan2 
+.................... 0xD1, 0x37, //Prox_Settings0 
+.................... 0xD2, 0x80, //Prox_Settings1 
+.................... 0xD3, 0x00, //Prox_Settings2 
+.................... 0xD4, 0x00, //Prox_Settings3 
+.................... 0xD5, 0x07, //Active_Chan 
+.................... 0xD6, 0x00, //Low_Power 
+.................... 0xD7, 0x00, //Dycal_Settings 
+.................... 0xD8, 0x00, //Dycal_Chan 
+.................... 0xD9, 0xC2,  //Event_Mask 
+.................... 0xDD, 0x00  //Default_Comms_Pointer 
+.................... }; 
+*
+018F:  MOVLW  C4
+0190:  MOVWF  2E
+0191:  MOVLW  96
+0192:  MOVWF  2F
+0193:  MOVLW  C5
+0194:  MOVWF  30
+0195:  MOVLW  96
+0196:  MOVWF  31
+0197:  MOVLW  C6
+0198:  MOVWF  32
+0199:  MOVLW  A1
+019A:  MOVWF  33
+019B:  MOVLW  C7
+019C:  MOVWF  34
+019D:  MOVLW  B5
+019E:  MOVWF  35
+019F:  MOVLW  C8
+01A0:  MOVWF  36
+01A1:  MOVLW  A5
+01A2:  MOVWF  37
+01A3:  MOVLW  C9
+01A4:  MOVWF  38
+01A5:  MOVLW  A5
+01A6:  MOVWF  39
+01A7:  MOVLW  CA
+01A8:  MOVWF  3A
+01A9:  MOVLW  A6
+01AA:  MOVWF  3B
+01AB:  MOVLW  CB
+01AC:  MOVWF  3C
+01AD:  MOVLW  0F
+01AE:  MOVWF  3D
+01AF:  MOVLW  CC
+01B0:  MOVWF  3E
+01B1:  MOVLW  0F
+01B2:  MOVWF  3F
+01B3:  MOVLW  CD
+01B4:  MOVWF  40
+01B5:  MOVLW  0F
+01B6:  MOVWF  41
+01B7:  MOVLW  CE
+01B8:  MOVWF  42
+01B9:  MOVLW  0D
+01BA:  MOVWF  43
+01BB:  MOVLW  CF
+01BC:  MOVWF  44
+01BD:  MOVLW  0D
+01BE:  MOVWF  45
+01BF:  MOVLW  D0
+01C0:  MOVWF  46
+01C1:  MOVLW  0D
+01C2:  MOVWF  47
+01C3:  MOVLW  D1
+01C4:  MOVWF  48
+01C5:  MOVLW  37
+01C6:  MOVWF  49
+01C7:  MOVLW  D2
+01C8:  MOVWF  4A
+01C9:  MOVLW  80
+01CA:  MOVWF  4B
+01CB:  MOVLW  D3
+01CC:  MOVWF  4C
+01CD:  CLRF   4D
+01CE:  MOVLW  D4
+01CF:  MOVWF  4E
+01D0:  CLRF   4F
+01D1:  MOVLW  D5
+01D2:  MOVWF  50
+01D3:  MOVLW  07
+01D4:  MOVWF  51
+01D5:  MOVLW  D6
+01D6:  MOVWF  52
+01D7:  CLRF   53
+01D8:  MOVLW  D7
+01D9:  MOVWF  54
+01DA:  CLRF   55
+01DB:  MOVLW  D8
+01DC:  MOVWF  56
+01DD:  CLRF   57
+01DE:  MOVLW  D9
+01DF:  MOVWF  58
+01E0:  MOVLW  C2
+01E1:  MOVWF  59
+01E2:  MOVLW  DD
+01E3:  MOVWF  5A
+01E4:  CLRF   5B
+....................  
+....................  
+....................   //First Make a Handshake to Bring up comms window 
+....................    printf("Configuring IQS253  \n\r  "); 
+01E5:  MOVLW  03
+01E6:  MOVLB  03
+01E7:  MOVWF  11
+01E8:  MOVLW  00
+01E9:  MOVWF  12
+01EA:  MOVLB  00
+01EB:  CALL   047
+....................    output_low(PIN_A1); 
+01EC:  MOVLB  01
+01ED:  BCF    0C.1
+01EE:  MOVLB  02
+01EF:  BCF    0C.1
+....................    delay_ms(10); 
+01F0:  MOVLW  0A
+01F1:  MOVLB  00
+01F2:  MOVWF  5C
+01F3:  CALL   092
+....................    output_float(PIN_A1); 
+01F4:  MOVLB  01
+01F5:  BSF    0C.1
+....................    delay_ms(1); 
+01F6:  MOVLW  01
+01F7:  MOVLB  00
+01F8:  MOVWF  5C
+01F9:  CALL   092
+....................    if( !input(PIN_A1)) 
+01FA:  MOVLB  01
+01FB:  BSF    0C.1
+01FC:  MOVLB  00
+01FD:  BTFSC  0C.1
+01FE:  GOTO   2E5
+....................    { 
+....................     
+....................    for (i=0; i<46; i=i+2) 
+01FF:  CLRF   22
+0200:  MOVF   22,W
+0201:  SUBLW  2D
+0202:  BTFSS  03.0
+0203:  GOTO   2D1
+....................    { 
+....................    i2c_start(); 
+0204:  MOVLB  01
+0205:  BSF    0D.1
+0206:  NOP
+0207:  BSF    0D.4
+0208:  NOP
+0209:  MOVLB  02
+020A:  BCF    0D.1
+020B:  MOVLB  01
+020C:  BCF    0D.1
+020D:  NOP
+020E:  MOVLB  02
+020F:  BCF    0D.4
+0210:  MOVLB  01
+0211:  BCF    0D.4
+....................    i2c_write(IQS253_Address); 
+0212:  MOVLB  00
+0213:  MOVF   26,W
+0214:  MOVWF  5D
+0215:  CALL   0A7
+....................    i2c_write(settings[i]); 
+0216:  MOVLW  0E
+0217:  ADDWF  22,W
+0218:  MOVWF  04
+0219:  MOVLW  20
+021A:  MOVWF  05
+021B:  BTFSC  03.0
+021C:  INCF   05,F
+021D:  MOVF   00,W
+021E:  MOVWF  5C
+021F:  MOVWF  5D
+0220:  CALL   0A7
+....................    i2c_write(settings [i+1]); 
+0221:  MOVLW  01
+0222:  ADDWF  22,W
+0223:  ADDLW  0E
+0224:  MOVWF  04
+0225:  MOVLW  20
+0226:  MOVWF  05
+0227:  BTFSC  03.0
+0228:  INCF   05,F
+0229:  MOVF   00,W
+022A:  MOVWF  5C
+022B:  MOVWF  5D
+022C:  CALL   0A7
+....................     
+....................     
+....................     i2c_start(); 
+022D:  MOVLB  01
+022E:  BSF    0D.1
+022F:  NOP
+0230:  BSF    0D.4
+0231:  NOP
+0232:  MOVLB  00
+0233:  BTFSS  0D.4
+0234:  GOTO   233
+0235:  MOVLB  02
+0236:  BCF    0D.1
+0237:  MOVLB  01
+0238:  BCF    0D.1
+0239:  NOP
+023A:  MOVLB  02
+023B:  BCF    0D.4
+023C:  MOVLB  01
+023D:  BCF    0D.4
+....................   i2c_write(IQS253_Address); 
+023E:  MOVLB  00
+023F:  MOVF   26,W
+0240:  MOVWF  5D
+0241:  CALL   0A7
+....................   i2c_write (settings[i]); 
+0242:  MOVLW  0E
+0243:  ADDWF  22,W
+0244:  MOVWF  04
+0245:  MOVLW  20
+0246:  MOVWF  05
+0247:  BTFSC  03.0
+0248:  INCF   05,F
+0249:  MOVF   00,W
+024A:  MOVWF  5C
+024B:  MOVWF  5D
+024C:  CALL   0A7
+....................   i2c_start(); 
+024D:  MOVLB  01
+024E:  BSF    0D.1
+024F:  NOP
+0250:  BSF    0D.4
+0251:  NOP
+0252:  MOVLB  00
+0253:  BTFSS  0D.4
+0254:  GOTO   253
+0255:  MOVLB  02
+0256:  BCF    0D.1
+0257:  MOVLB  01
+0258:  BCF    0D.1
+0259:  NOP
+025A:  MOVLB  02
+025B:  BCF    0D.4
+025C:  MOVLB  01
+025D:  BCF    0D.4
+....................   i2c_write(IQS253_Address +1); 
+025E:  MOVLW  01
+025F:  MOVLB  00
+0260:  ADDWF  26,W
+0261:  MOVWF  5C
+0262:  MOVWF  5D
+0263:  CALL   0A7
+....................   data = i2c_read(0); 
+0264:  CLRF   77
+0265:  CALL   0DF
+0266:  MOVF   78,W
+0267:  MOVWF  24
+....................   printf("Register  %X,  ",settings[i]); 
+0268:  MOVLW  0E
+0269:  ADDWF  22,W
+026A:  MOVWF  04
+026B:  MOVLW  20
+026C:  MOVWF  05
+026D:  BTFSC  03.0
+026E:  INCF   05,F
+026F:  MOVF   00,W
+0270:  MOVWF  5C
+0271:  MOVLW  10
+0272:  MOVLB  03
+0273:  MOVWF  11
+0274:  MOVLW  00
+0275:  MOVWF  12
+0276:  BCF    03.0
+0277:  MOVLW  0A
+0278:  MOVLB  00
+0279:  MOVWF  5D
+027A:  CALL   115
+027B:  MOVF   5C,W
+027C:  MOVWF  5D
+027D:  MOVLW  37
+027E:  MOVWF  5E
+027F:  CALL   168
+0280:  MOVLW  2C
+0281:  BTFSS  11.4
+0282:  GOTO   281
+0283:  MOVLB  03
+0284:  MOVWF  1A
+0285:  MOVLW  20
+0286:  MOVLB  00
+0287:  BTFSS  11.4
+0288:  GOTO   287
+0289:  MOVLB  03
+028A:  MOVWF  1A
+028B:  MOVLW  20
+028C:  MOVLB  00
+028D:  BTFSS  11.4
+028E:  GOTO   28D
+028F:  MOVLB  03
+0290:  MOVWF  1A
+....................   printf("Data Sent  %X  ",settings[i+1]); 
+0291:  MOVLW  01
+0292:  MOVLB  00
+0293:  ADDWF  22,W
+0294:  ADDLW  0E
+0295:  MOVWF  04
+0296:  MOVLW  20
+0297:  MOVWF  05
+0298:  BTFSC  03.0
+0299:  INCF   05,F
+029A:  MOVF   00,W
+029B:  MOVWF  5C
+029C:  MOVLW  18
+029D:  MOVLB  03
+029E:  MOVWF  11
+029F:  MOVLW  00
+02A0:  MOVWF  12
+02A1:  BCF    03.0
+02A2:  MOVLW  0B
+02A3:  MOVLB  00
+02A4:  MOVWF  5D
+02A5:  CALL   115
+02A6:  MOVF   5C,W
+02A7:  MOVWF  5D
+02A8:  MOVLW  37
+02A9:  MOVWF  5E
+02AA:  CALL   168
+02AB:  MOVLW  20
+02AC:  BTFSS  11.4
+02AD:  GOTO   2AC
+02AE:  MOVLB  03
+02AF:  MOVWF  1A
+02B0:  MOVLW  20
+02B1:  MOVLB  00
+02B2:  BTFSS  11.4
+02B3:  GOTO   2B2
+02B4:  MOVLB  03
+02B5:  MOVWF  1A
+....................   printf("Data Got   %X\n\r  ",data); 
+02B6:  MOVLW  20
+02B7:  MOVWF  11
+02B8:  MOVLW  00
+02B9:  MOVWF  12
+02BA:  BCF    03.0
+02BB:  MOVLW  0B
+02BC:  MOVLB  00
+02BD:  MOVWF  5D
+02BE:  CALL   115
+02BF:  MOVF   24,W
+02C0:  MOVWF  5D
+02C1:  MOVLW  37
+02C2:  MOVWF  5E
+02C3:  CALL   168
+02C4:  MOVLW  26
+02C5:  MOVLB  03
+02C6:  MOVWF  11
+02C7:  MOVLW  00
+02C8:  MOVWF  12
+02C9:  BSF    03.0
+02CA:  MOVLW  04
+02CB:  MOVLB  00
+02CC:  MOVWF  5D
+02CD:  CALL   115
+....................    } 
+02CE:  MOVLW  02
+02CF:  ADDWF  22,F
+02D0:  GOTO   200
+....................    i2c_stop(); 
+02D1:  MOVLB  01
+02D2:  BCF    0D.1
+02D3:  NOP
+02D4:  BSF    0D.4
+02D5:  MOVLB  00
+02D6:  BTFSS  0D.4
+02D7:  GOTO   2D6
+02D8:  NOP
+02D9:  GOTO   2DA
+02DA:  NOP
+02DB:  MOVLB  01
+02DC:  BSF    0D.1
+02DD:  NOP
+....................    printf("Done...  \n\r  "); 
+02DE:  MOVLW  29
+02DF:  MOVLB  03
+02E0:  MOVWF  11
+02E1:  MOVLW  00
+02E2:  MOVWF  12
+02E3:  MOVLB  00
+02E4:  CALL   047
+....................    } 
+....................    
+.................... } 
+02E5:  MOVLP  00
+02E6:  GOTO   3B4 (RETURN)
+....................  
+.................... int8 IQS253_status() 
+.................... { 
+....................   i2c_start(); 
+*
+0336:  MOVLB  01
+0337:  BSF    0D.1
+0338:  NOP
+0339:  BSF    0D.4
+033A:  NOP
+033B:  MOVLB  02
+033C:  BCF    0D.1
+033D:  MOVLB  01
+033E:  BCF    0D.1
+033F:  NOP
+0340:  MOVLB  02
+0341:  BCF    0D.4
+0342:  MOVLB  01
+0343:  BCF    0D.4
+....................   i2c_write(IQS253_Address); 
+0344:  MOVLB  00
+0345:  MOVF   26,W
+0346:  MOVWF  5D
+0347:  CALL   0A7
+....................   i2c_write (TOUCH_STATUS); 
+0348:  MOVLW  35
+0349:  MOVWF  5D
+034A:  CALL   0A7
+....................   i2c_start(); 
+034B:  MOVLB  01
+034C:  BSF    0D.1
+034D:  NOP
+034E:  BSF    0D.4
+034F:  NOP
+0350:  MOVLB  00
+0351:  BTFSS  0D.4
+0352:  GOTO   351
+0353:  MOVLB  02
+0354:  BCF    0D.1
+0355:  MOVLB  01
+0356:  BCF    0D.1
+0357:  NOP
+0358:  MOVLB  02
+0359:  BCF    0D.4
+035A:  MOVLB  01
+035B:  BCF    0D.4
+....................   i2c_write(IQS253_Address +1); 
+035C:  MOVLW  01
+035D:  MOVLB  00
+035E:  ADDWF  26,W
+035F:  MOVWF  2E
+0360:  MOVWF  5D
+0361:  CALL   0A7
+....................   data = i2c_read(0); 
+0362:  CLRF   77
+0363:  CALL   0DF
+0364:  MOVF   78,W
+0365:  MOVWF  24
+....................   i2c_stop();  
+0366:  MOVLB  01
+0367:  BCF    0D.1
+0368:  NOP
+0369:  BSF    0D.4
+036A:  MOVLB  00
+036B:  BTFSS  0D.4
+036C:  GOTO   36B
+036D:  NOP
+036E:  GOTO   36F
+036F:  NOP
+0370:  MOVLB  01
+0371:  BSF    0D.1
+0372:  NOP
+....................    
+....................   return(data); 
+0373:  MOVLB  00
+0374:  MOVF   24,W
+0375:  MOVWF  78
+....................   //while ( !input(PIN_A1)){} 
+....................    
+....................    
+.................... } 
+0376:  RETURN
+....................    
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... #include <PCA9554.c> 
+.................... /* 
+.................... * 1/2014 
+.................... * Eric Daine 
+.................... */ 
+....................  
+.................... #include <PCA9554.h> 
+.................... /* 
+.................... * PCA9554 Library 
+.................... * Eric Daine 
+.................... * 1/2014 
+.................... */ 
+....................  
+.................... //Button Defines 
+.................... #define Button1_On 0b11111100 
+.................... #define Button1_Off 0b11111111 
+....................  
+.................... #define Button2_0n 0b11110011 
+.................... #define Button2_Off 0b11111111 
+....................  
+.................... #define Button3A_On 0b10101111 
+.................... #define Button3A_Off 0b11111111 
+....................  
+.................... #define Button3B_On 0b01011111 
+.................... #define Button3B_Off 0b11111111 
+....................  
+.................... //Register Defines 
+....................  
+.................... #define Input_Port 0x00 
+.................... #define Output_Port 0x01 
+.................... #define Polarity 0x02 
+.................... #define Configuration 0x03 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... int8 PCA9554_Address = 0x40; 
+....................  
+....................  
+.................... void PCA9554_Direction(int8 dir) 
+.................... { 
+....................   i2c_start(); 
+*
+02E7:  MOVLB  01
+02E8:  BSF    0D.1
+02E9:  NOP
+02EA:  BSF    0D.4
+02EB:  NOP
+02EC:  MOVLB  02
+02ED:  BCF    0D.1
+02EE:  MOVLB  01
+02EF:  BCF    0D.1
+02F0:  NOP
+02F1:  MOVLB  02
+02F2:  BCF    0D.4
+02F3:  MOVLB  01
+02F4:  BCF    0D.4
+....................   i2c_write(PCA9554_Address); 
+02F5:  MOVLB  00
+02F6:  MOVF   27,W
+02F7:  MOVWF  5D
+02F8:  CALL   0A7
+....................   i2c_write(Configuration); 
+02F9:  MOVLW  03
+02FA:  MOVWF  5D
+02FB:  CALL   0A7
+....................   i2c_write(dir); 
+02FC:  MOVF   2E,W
+02FD:  MOVWF  5D
+02FE:  CALL   0A7
+....................   i2c_stop();    
+02FF:  MOVLB  01
+0300:  BCF    0D.1
+0301:  NOP
+0302:  BSF    0D.4
+0303:  MOVLB  00
+0304:  BTFSS  0D.4
+0305:  GOTO   304
+0306:  NOP
+0307:  GOTO   308
+0308:  NOP
+0309:  MOVLB  01
+030A:  BSF    0D.1
+030B:  NOP
+.................... } 
+030C:  MOVLP  00
+030D:  MOVLB  00
+030E:  GOTO   3B9 (RETURN)
+....................  
+....................  
+....................  
+.................... void PCA9554_Output_States(int8 PortState) 
+.................... { 
+....................   i2c_start(); 
+030F:  MOVLB  01
+0310:  BSF    0D.1
+0311:  NOP
+0312:  BSF    0D.4
+0313:  NOP
+0314:  MOVLB  02
+0315:  BCF    0D.1
+0316:  MOVLB  01
+0317:  BCF    0D.1
+0318:  NOP
+0319:  MOVLB  02
+031A:  BCF    0D.4
+031B:  MOVLB  01
+031C:  BCF    0D.4
+....................   i2c_write(PCA9554_Address); 
+031D:  MOVLB  00
+031E:  MOVF   27,W
+031F:  MOVWF  5D
+0320:  CALL   0A7
+....................   i2c_write(Output_Port); 
+0321:  MOVLW  01
+0322:  MOVWF  5D
+0323:  CALL   0A7
+....................   i2c_write(PortState); 
+0324:  MOVF   2E,W
+0325:  MOVWF  5D
+0326:  CALL   0A7
+....................   i2c_stop(); 
+0327:  MOVLB  01
+0328:  BCF    0D.1
+0329:  NOP
+032A:  BSF    0D.4
+032B:  MOVLB  00
+032C:  BTFSS  0D.4
+032D:  GOTO   32C
+032E:  NOP
+032F:  GOTO   330
+0330:  NOP
+0331:  MOVLB  01
+0332:  BSF    0D.1
+0333:  NOP
+.................... } 
+0334:  MOVLB  00
+0335:  RETURN
+....................  
+....................  
+....................  
+....................  
+.................... // This function writes the slave address to the i2c bus. 
+.................... // If a slave chip is at that address, it should respond to 
+.................... // this with an "ACK".   This function returns TRUE if an 
+.................... // ACK was found.  Otherwise it returns FALSE. 
+.................... int8 get_ack_status(int8 address) 
+.................... { 
+.................... int8 status; 
+....................  
+.................... i2c_start(); 
+.................... status = i2c_write(address);  // Status = 0 if got an ACK 
+.................... i2c_stop(); 
+....................  
+.................... if(status == 0) 
+....................    return(TRUE); 
+.................... else 
+....................    return(FALSE); 
+.................... }  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... void main(){ 
+*
+0377:  CLRF   05
+0378:  CLRF   04
+0379:  MOVLW  1F
+037A:  ANDWF  03,F
+037B:  MOVLB  02
+037C:  BSF    1E.0
+037D:  BSF    1D.7
+037E:  MOVLW  19
+037F:  MOVLB  03
+0380:  MOVWF  1B
+0381:  MOVLW  A6
+0382:  MOVWF  1E
+0383:  MOVLW  90
+0384:  MOVWF  1D
+0385:  MOVLW  88
+0386:  MOVLB  00
+0387:  MOVWF  26
+0388:  MOVLW  40
+0389:  MOVWF  27
+038A:  MOVLB  03
+038B:  CLRF   0C
+038C:  CLRF   0D
+038D:  MOVLB  02
+038E:  CLRF   12
+038F:  CLRF   11
+0390:  CLRF   14
+0391:  CLRF   13
+.................... setup_timer_0(RTCC_INTERNAL|RTCC_DIV_256); 
+0392:  MOVLB  01
+0393:  MOVF   15,W
+0394:  ANDLW  C0
+0395:  IORLW  07
+0396:  MOVWF  15
+.................... setup_timer_1(T1_INTERNAL ); 
+0397:  MOVLW  05
+0398:  MOVLB  00
+0399:  MOVWF  18
+039A:  CLRF   19
+.................... setup_oscillator (OSC_8MHZ); 
+039B:  MOVLW  70
+039C:  MOVLB  01
+039D:  MOVWF  19
+.................... setup_adc_ports(sAN2|sAN3|sAN4|VSS_VDD); 
+039E:  BCF    1E.0
+039F:  BCF    1E.1
+03A0:  BCF    1E.2
+03A1:  MOVLW  1C
+03A2:  MOVLB  03
+03A3:  MOVWF  0C
+03A4:  MOVLW  00
+03A5:  MOVWF  0D
+.................... setup_adc(ADC_CLOCK_INTERNAL); 
+03A6:  MOVLB  01
+03A7:  BSF    1E.4
+03A8:  BSF    1E.5
+03A9:  BCF    1E.6
+03AA:  BSF    1E.7
+03AB:  BSF    1D.0
+.................... setup_comparator(NC_NC_NC_NC); 
+03AC:  MOVLB  02
+03AD:  CLRF   12
+03AE:  CLRF   11
+03AF:  CLRF   14
+03B0:  CLRF   13
+.................... setup_vref(FALSE); 
+03B1:  CLRF   17
+....................  
+.................... int8 Button; 
+.................... int8 Button_States,Button1_State,Button2_State,Button3A_State,Button3B_State; 
+....................  
+.................... //Main loop starts here... 
+....................  
+.................... //Setup the IQS253 
+.................... IQS253_Init(); 
+03B2:  MOVLB  00
+03B3:  GOTO   18F
+.................... delay_ms(100); 
+03B4:  MOVLW  64
+03B5:  MOVWF  5C
+03B6:  CALL   092
+....................  
+.................... PCA9554_Direction(0x00); 
+03B7:  CLRF   2E
+03B8:  GOTO   2E7
+.................... PCA9554_Output_States(0xFF); //Turn EveryOne OFF 
+03B9:  MOVLW  FF
+03BA:  MOVWF  2E
+03BB:  CALL   30F
+.................... delay_ms(100); 
+03BC:  MOVLW  64
+03BD:  MOVWF  5C
+03BE:  CALL   092
+....................  
+.................... Button1_State=Button1_Off; 
+03BF:  MOVLW  FF
+03C0:  MOVWF  2A
+.................... Button2_State=Button2_Off; 
+03C1:  MOVWF  2B
+.................... Button3A_State=Button3A_On; 
+03C2:  MOVLW  AF
+03C3:  MOVWF  2C
+.................... Button3B_State=Button3B_Off; 
+03C4:  MOVLW  FF
+03C5:  MOVWF  2D
+....................  
+.................... Button_States=(Button1_State&Button2_State&Button3A_State&Button3B_State); 
+03C6:  MOVF   2A,W
+03C7:  ANDWF  2B,W
+03C8:  ANDWF  2C,W
+03C9:  ANDWF  2D,W
+03CA:  MOVWF  29
+....................  
+.................... //Test the Buttons LED Fing up the Outputs 
+.................... //PCA9554_Output_States(Button1_Off & Button2_0n & Button3A_Off & Button3B_Off); 
+....................  
+.................... while(1){ 
+.................... if(!input(PIN_A1)) 
+03CB:  MOVLB  01
+03CC:  BSF    0C.1
+03CD:  MOVLB  00
+03CE:  BTFSC  0C.1
+03CF:  GOTO   451
+.................... { 
+.................... Button = IQS253_Status(); 
+03D0:  CALL   336
+03D1:  MOVF   78,W
+03D2:  MOVWF  28
+....................  
+.................... if ((Button == 0x81) && (Button1_State == Button1_Off)) 
+03D3:  MOVF   28,W
+03D4:  SUBLW  81
+03D5:  BTFSS  03.2
+03D6:  GOTO   3DC
+03D7:  INCFSZ 2A,W
+03D8:  GOTO   3DC
+....................    Button1_State=Button1_On; 
+03D9:  MOVLW  FC
+03DA:  MOVWF  2A
+.................... else if ((Button == 0x81) & (Button1_State == Button1_On)) 
+03DB:  GOTO   3F0
+03DC:  MOVF   28,W
+03DD:  SUBLW  81
+03DE:  BTFSC  03.2
+03DF:  GOTO   3E2
+03E0:  MOVLW  00
+03E1:  GOTO   3E3
+03E2:  MOVLW  01
+03E3:  MOVWF  2E
+03E4:  MOVF   2A,W
+03E5:  SUBLW  FC
+03E6:  BTFSC  03.2
+03E7:  GOTO   3EA
+03E8:  MOVLW  00
+03E9:  GOTO   3EB
+03EA:  MOVLW  01
+03EB:  ANDWF  2E,W
+03EC:  BTFSC  03.2
+03ED:  GOTO   3F0
+....................    Button1_State=Button1_Off; 
+03EE:  MOVLW  FF
+03EF:  MOVWF  2A
+....................     
+.................... if ((Button == 0x84) && (Button2_State == Button2_Off)) 
+03F0:  MOVF   28,W
+03F1:  SUBLW  84
+03F2:  BTFSS  03.2
+03F3:  GOTO   3F9
+03F4:  INCFSZ 2B,W
+03F5:  GOTO   3F9
+....................    Button2_State=Button2_0n; 
+03F6:  MOVLW  F3
+03F7:  MOVWF  2B
+.................... else if ((Button == 0x84) & (Button2_State == Button2_0n)) 
+03F8:  GOTO   40D
+03F9:  MOVF   28,W
+03FA:  SUBLW  84
+03FB:  BTFSC  03.2
+03FC:  GOTO   3FF
+03FD:  MOVLW  00
+03FE:  GOTO   400
+03FF:  MOVLW  01
+0400:  MOVWF  2E
+0401:  MOVF   2B,W
+0402:  SUBLW  F3
+0403:  BTFSC  03.2
+0404:  GOTO   407
+0405:  MOVLW  00
+0406:  GOTO   408
+0407:  MOVLW  01
+0408:  ANDWF  2E,W
+0409:  BTFSC  03.2
+040A:  GOTO   40D
+....................    Button2_State=Button2_Off; 
+040B:  MOVLW  FF
+040C:  MOVWF  2B
+....................     
+.................... if ((Button == 0x82) && (Button3A_State == Button3A_On)){ 
+040D:  MOVF   28,W
+040E:  SUBLW  82
+040F:  BTFSS  03.2
+0410:  GOTO   41A
+0411:  MOVF   2C,W
+0412:  SUBLW  AF
+0413:  BTFSS  03.2
+0414:  GOTO   41A
+....................    Button3A_State=Button3A_Off; 
+0415:  MOVLW  FF
+0416:  MOVWF  2C
+....................    Button3B_State=Button3B_On; 
+0417:  MOVLW  5F
+0418:  MOVWF  2D
+....................    } 
+.................... else if ((Button == 0x82) & (Button3B_State == Button3B_On)){ 
+0419:  GOTO   430
+041A:  MOVF   28,W
+041B:  SUBLW  82
+041C:  BTFSC  03.2
+041D:  GOTO   420
+041E:  MOVLW  00
+041F:  GOTO   421
+0420:  MOVLW  01
+0421:  MOVWF  2E
+0422:  MOVF   2D,W
+0423:  SUBLW  5F
+0424:  BTFSC  03.2
+0425:  GOTO   428
+0426:  MOVLW  00
+0427:  GOTO   429
+0428:  MOVLW  01
+0429:  ANDWF  2E,W
+042A:  BTFSC  03.2
+042B:  GOTO   430
+....................    Button3B_State=Button3B_Off; 
+042C:  MOVLW  FF
+042D:  MOVWF  2D
+....................    Button3A_State=Button3A_On; 
+042E:  MOVLW  AF
+042F:  MOVWF  2C
+.................... } 
+....................  
+....................  
+.................... printf("Touch Status  %X\n\r  ",Button); 
+0430:  MOVLW  30
+0431:  MOVLB  03
+0432:  MOVWF  11
+0433:  MOVLW  00
+0434:  MOVWF  12
+0435:  BCF    03.0
+0436:  MOVLW  0E
+0437:  MOVLB  00
+0438:  MOVWF  5D
+0439:  CALL   115
+043A:  MOVF   28,W
+043B:  MOVWF  5D
+043C:  MOVLW  37
+043D:  MOVWF  5E
+043E:  CALL   168
+043F:  MOVLW  38
+0440:  MOVLB  03
+0441:  MOVWF  11
+0442:  MOVLW  00
+0443:  MOVWF  12
+0444:  BCF    03.0
+0445:  MOVLW  04
+0446:  MOVLB  00
+0447:  MOVWF  5D
+0448:  CALL   115
+.................... Button_States=(Button1_State&Button2_State&Button3A_State&Button3B_State); 
+0449:  MOVF   2A,W
+044A:  ANDWF  2B,W
+044B:  ANDWF  2C,W
+044C:  ANDWF  2D,W
+044D:  MOVWF  29
+.................... PCA9554_Output_States(Button_States); 
+044E:  MOVF   29,W
+044F:  MOVWF  2E
+0450:  CALL   30F
+.................... } 
+.................... } 
+0451:  GOTO   3CB
+....................  
+....................  
+.................... while(1){ 
+....................  
+.................... PCA9554_Output_States(Button1_On & Button2_Off & Button3A_Off & Button3B_Off); 
+0452:  MOVLW  FC
+0453:  MOVWF  2E
+0454:  CALL   30F
+.................... delay_ms(1000); 
+0455:  MOVLW  04
+0456:  MOVWF  2E
+0457:  MOVLW  FA
+0458:  MOVWF  5C
+0459:  CALL   092
+045A:  DECFSZ 2E,F
+045B:  GOTO   457
+....................  
+.................... PCA9554_Output_States(Button1_Off & Button2_0n & Button3A_Off & Button3B_Off); 
+045C:  MOVLW  F3
+045D:  MOVWF  2E
+045E:  CALL   30F
+.................... delay_ms(1000); 
+045F:  MOVLW  04
+0460:  MOVWF  2E
+0461:  MOVLW  FA
+0462:  MOVWF  5C
+0463:  CALL   092
+0464:  DECFSZ 2E,F
+0465:  GOTO   461
+....................  
+.................... PCA9554_Output_States(Button1_Off & Button2_Off & Button3A_On & Button3B_Off); 
+0466:  MOVLW  AF
+0467:  MOVWF  2E
+0468:  CALL   30F
+.................... delay_ms(1000); 
+0469:  MOVLW  04
+046A:  MOVWF  2E
+046B:  MOVLW  FA
+046C:  MOVWF  5C
+046D:  CALL   092
+046E:  DECFSZ 2E,F
+046F:  GOTO   46B
+....................  
+.................... PCA9554_Output_States(Button1_Off & Button2_Off & Button3A_Off & Button3B_On); 
+0470:  MOVLW  5F
+0471:  MOVWF  2E
+0472:  CALL   30F
+.................... delay_ms(1000); 
+0473:  MOVLW  04
+0474:  MOVWF  2E
+0475:  MOVLW  FA
+0476:  MOVWF  5C
+0477:  CALL   092
+0478:  DECFSZ 2E,F
+0479:  GOTO   475
+....................  
+.................... PCA9554_Output_States(Button1_Off & Button2_Off & Button3A_On & Button3B_On); 
+047A:  MOVLW  0F
+047B:  MOVWF  2E
+047C:  CALL   30F
+.................... delay_ms(1000); 
+047D:  MOVLW  04
+047E:  MOVWF  2E
+047F:  MOVLW  FA
+0480:  MOVWF  5C
+0481:  CALL   092
+0482:  DECFSZ 2E,F
+0483:  GOTO   47F
+....................  
+.................... PCA9554_Output_States(Button1_Off & Button2_Off & Button3A_Off & Button3B_Off); 
+0484:  MOVLW  FF
+0485:  MOVWF  2E
+0486:  CALL   30F
+.................... delay_ms(1000); 
+0487:  MOVLW  04
+0488:  MOVWF  2E
+0489:  MOVLW  FA
+048A:  MOVWF  5C
+048B:  CALL   092
+048C:  DECFSZ 2E,F
+048D:  GOTO   489
+....................  
+....................  
+.................... printf("Attempting Comms...\n\r "); 
+048E:  MOVLW  3B
+048F:  MOVLB  03
+0490:  MOVWF  11
+0491:  MOVLW  00
+0492:  MOVWF  12
+0493:  MOVLB  00
+0494:  CALL   047
+....................  
+.................... output_low(PIN_A1); 
+0495:  MOVLB  01
+0496:  BCF    0C.1
+0497:  MOVLB  02
+0498:  BCF    0C.1
+.................... delay_ms(15); 
+0499:  MOVLW  0F
+049A:  MOVLB  00
+049B:  MOVWF  5C
+049C:  CALL   092
+.................... output_float(PIN_A1); 
+049D:  MOVLB  01
+049E:  BSF    0C.1
+.................... delay_ms(1); 
+049F:  MOVLW  01
+04A0:  MOVLB  00
+04A1:  MOVWF  5C
+04A2:  CALL   092
+.................... if( !input(PIN_A1)) 
+04A3:  MOVLB  01
+04A4:  BSF    0C.1
+04A5:  MOVLB  00
+04A6:  BTFSS  0C.1
+.................... IQS253_Status(); 
+04A7:  CALL   336
+.................... } 
+04A8:  GOTO   452
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................     
+....................     
+....................     
+....................     
+....................     
+....................     
+....................    
+....................     
+....................  
+....................  
+04A9:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0984   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD NOBROWNOUT NOCLKOUT NOIESO NOFCMEN
+   Word  2: 1EFF   NOWRT PLL_SW STVREN BORV19 NODEBUG NOLVP

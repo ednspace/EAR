@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<export version="D">
+    <design>
+        <source>/home/ed/Dropbox/KiCad/EAR-KiCad/ButtonPCB-V4-KiCad/ButtonPad-V4-KiCad/ButtonPad-V4-KiCad.sch</source>
+        <date>Fri 22 Nov 2013 12:01:15 PM EST</date>
+        <tool>eeschema (2013-11-17 BZR 4480)-product</tool>
+    </design>
+    <components>
+        <comp ref="LED1">
+            <value>BICOLORLED</value>
+            <libsource lib="bicolorled" part="BICOLORLED"/>
+            <sheetpath names="/" tstamps="/"/>
+            <tstamp>528E47CF</tstamp>
+        </comp>
+        <comp ref="LED2">
+            <value>BICOLORLED</value>
+            <libsource lib="bicolorled" part="BICOLORLED"/>
+            <sheetpath names="/" tstamps="/"/>
+            <tstamp>528E6BB3</tstamp>
+        </comp>
+        <comp ref="J1">
+            <value>HEADER_4</value>
+            <libsource lib="w_connectors" part="HEADER_4"/>
+            <sheetpath names="/" tstamps="/"/>
+            <tstamp>528E6CD7</tstamp>
+        </comp>
+        <comp ref="J2">
+            <value>HEADER_4</value>
+            <libsource lib="w_connectors" part="HEADER_4"/>
+            <sheetpath names="/" tstamps="/"/>
+            <tstamp>528E6CEB</tstamp>
+        </comp>
+    </components>
+    <libparts>
+        <libpart lib="bicolorled" part="BICOLORLED">
+            <fields>
+                <field name="Reference">LED</field>
+                <field name="Value">BICOLORLED</field>
+            </fields>
+            <pins>
+                <pin num="1" name="Yel/GreenK" type="input"/>
+                <pin num="2" name="RedK" type="input"/>
+                <pin num="3" name="RedA" type="input"/>
+                <pin num="4" name="Yel/GreenA" type="input"/>
+            </pins>
+        </libpart>
+        <libpart lib="w_connectors" part="HEADER_4">
+            <fields>
+                <field name="Reference">J</field>
+                <field name="Value">HEADER_4</field>
+            </fields>
+            <pins>
+                <pin num="1" name="~" type="passive"/>
+                <pin num="2" name="~" type="passive"/>
+                <pin num="3" name="~" type="passive"/>
+                <pin num="4" name="~" type="passive"/>
+            </pins>
+        </libpart>
+    </libparts>
+    <libraries>
+        <library logical="bicolorled">
+            <uri>bicolorled.lib</uri>
+        </library>
+        <library logical="w_connectors">
+            <uri>/home/ed/Dropbox/KiCad/libKiCad/symbol/w_connectors.lib</uri>
+        </library>
+    </libraries>
+    <nets>
+        <net code="1" name="Net-(J1-Pad2)">
+            <node ref="J1" pin="2"/>
+            <node ref="LED1" pin="1"/>
+        </net>
+        <net code="2" name="VCC">
+            <node ref="J1" pin="4"/>
+            <node ref="LED1" pin="4"/>
+            <node ref="LED1" pin="3"/>
+            <node ref="LED2" pin="3"/>
+            <node ref="LED2" pin="4"/>
+        </net>
+        <net code="3" name="Net-(J1-Pad1)">
+            <node ref="J1" pin="1"/>
+            <node ref="LED2" pin="2"/>
+        </net>
+        <net code="4" name="Net-(J2-Pad3)">
+            <node ref="J2" pin="3"/>
+            <node ref="LED2" pin="1"/>
+        </net>
+        <net code="5" name="Net-(J1-Pad3)">
+            <node ref="LED1" pin="2"/>
+            <node ref="J1" pin="3"/>
+        </net>
+        <net code="6" name="Net-(J2-Pad1)">
+            <node ref="J2" pin="1"/>
+        </net>
+        <net code="7" name="Net-(J2-Pad2)">
+            <node ref="J2" pin="2"/>
+        </net>
+        <net code="8" name="Net-(J2-Pad4)">
+            <node ref="J2" pin="4"/>
+        </net>
+    </nets>
+</export>

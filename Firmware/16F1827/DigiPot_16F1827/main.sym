@@ -1,0 +1,105 @@
+004-005 @READ_PACKED_MEMORY.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+004-005 @READ_PROGRAM_MEMORY8.P3
+004-005 @WRITE_PACKED_MEMORY.P4
+006-007 @READ_PACKED_MEMORY.P1
+006-007 @WRITE_PACKED_MEMORY.P2
+020     TCA9555_Address
+021     count
+022     Pot1
+023     Pot2
+024     Pot3
+025     MAIN.count
+026     setOutputStates.portNum
+026     @PRINTF_X_19200_106_105.P1
+026     setPortDirection.portNum
+026     @PSTRINGCN7_19200_106_105.P1
+026     setVolatileWiper.wiper
+026     MAIN.@SCRATCH1
+027     setPortDirection.dir
+027     setOutputStates.b
+027     @delay_ms1.P1
+027     setVolatileWiper.wiper_value
+027     @PRINTF_X_19200_106_105.P1
+027     @PSTRINGCN7_19200_106_105.@SCRATCH1
+028     setVolatileWiper.d_byte
+028     @PSTRINGCN7_19200_106_105.@SCRATCH2
+029     setVolatileWiper.c_byte
+029     @PSTRINGCN7_19200_106_105.@SCRATCH3
+02A     @I2C_WRITE_1.P1
+02A     @PSTRINGCN7_19200_106_105.@SCRATCH4
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+111.6   C1OUT
+113.6   C2OUT
+191-192 @READ_PROGRAM_MEMORY8.P1
+191-192 @WRITE_PROGRAM_MEMORY8.P2
+291     CCP_1_LOW
+291     CCP_1
+292     CCP_1_HIGH
+298     CCP_2
+298     CCP_2_LOW
+299     CCP_2_HIGH
+311     CCP_3
+311     CCP_3_LOW
+312     CCP_3_HIGH
+318     CCP_4_LOW
+318     CCP_4
+319     CCP_4_HIGH
+
+ROM Allocation:
+000E  @delay_ms1
+00B1  @I2C_WRITE_1
+00E9  setPortDirection
+0117  setOutputStates
+0145  setVolatileWiper
+0023  blink
+0186  MAIN
+0003  @const119
+0035  @PSTRINGCN7_19200_106_105
+0089  @PRINTF_X_19200_106_105
+0186  @cinit1
+019F  @cinit2
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\DigiPot-V1\
+
+Project Files:
+    main.c                                                  [10-Nov-13 00:10  CRC=88EA6E1B]
+    D:\Program Files (x86)\PICC\devices\16F1827.h           [01-Dec-11 14:35  CRC=B1B82A14]
+    MCP4461.h                                               [13-Oct-13 12:40  CRC=0F08151B]
+    TCA9555.c                                               [10-Nov-13 00:10  CRC=C2328172]
+    TCA9555.h                                               [09-Nov-13 20:37  CRC=82F4EFEA]
+
+Source signature=11C70E90
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F1827
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.STA

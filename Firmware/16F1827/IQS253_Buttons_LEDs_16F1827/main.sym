@@ -1,0 +1,126 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+004-005 @WRITE_PACKED_MEMORY.P3
+004-005 @READ_PACKED_MEMORY.P4
+006-007 @WRITE_PACKED_MEMORY.P1
+006-007 @READ_PACKED_MEMORY.P2
+020     status
+021     test
+022     i
+023     count
+024     data
+025     ID
+026     IQS253_Address
+027     PCA9554_Address
+028     MAIN.Button
+029     MAIN.Button_States
+02A     MAIN.Button1_State
+02B     MAIN.Button2_State
+02C     MAIN.Button3A_State
+02D     MAIN.Button3B_State
+02E-05B IQS253_Init.settings
+02E     PCA9554_Output_States.PortState
+02E     PCA9554_Direction.dir
+02E     IQS253_status.@SCRATCH1
+02E     MAIN.@SCRATCH1
+05C     @delay_ms1.P1
+05C     @I2C_READ_1.P2
+05C     IQS253_Init.@SCRATCH1
+05C     @PSTRINGC7_19200_106_105.@SCRATCH1
+05D     @PSTRINGCN7_19200_106_105.P1
+05D     @I2C_WRITE_1.P2
+05D     @PRINTF_X_19200_106_105.P3
+05D     @I2C_READ_1.@SCRATCH1
+05D     @PSTRINGC7_19200_106_105.@SCRATCH2
+05E     @PRINTF_X_19200_106_105.P1
+05E     @I2C_READ_1.@SCRATCH2
+05E     @PSTRINGC7_19200_106_105.@SCRATCH3
+05E     @PSTRINGCN7_19200_106_105.@SCRATCH1
+05F     @PSTRINGC7_19200_106_105.@SCRATCH4
+05F     @PSTRINGCN7_19200_106_105.@SCRATCH2
+060     @PSTRINGCN7_19200_106_105.@SCRATCH3
+061     @PSTRINGCN7_19200_106_105.@SCRATCH4
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+111.6   C1OUT
+113.6   C2OUT
+191-192 @READ_PROGRAM_MEMORY8.P1
+191-192 @WRITE_PROGRAM_MEMORY8.P2
+291     CCP_1
+291     CCP_1_LOW
+292     CCP_1_HIGH
+298     CCP_2_LOW
+298     CCP_2
+299     CCP_2_HIGH
+311     CCP_3
+311     CCP_3_LOW
+312     CCP_3_HIGH
+318     CCP_4
+318     CCP_4_LOW
+319     CCP_4_HIGH
+
+ROM Allocation:
+0092  @delay_ms1
+00DF  @I2C_READ_1
+00A7  @I2C_WRITE_1
+018F  IQS253_Init
+0003  @const88
+0047  @PSTRINGC7_19200_106_105
+0010  @const90
+0115  @PSTRINGCN7_19200_106_105
+0168  @PRINTF_X_19200_106_105
+0018  @const96
+0020  @const97
+0029  @const98
+0336  IQS253_status
+02E7  PCA9554_Direction
+030F  PCA9554_Output_States
+0377  MAIN
+0030  @const117
+003B  @const118
+0377  @cinit1
+0392  @cinit2
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Customer\Dropbox\Pic_Programs\16F1827\EAR\IQS253\
+
+Project Files:
+    main.c                                                  [22-Feb-14 18:48  CRC=75B36623]
+    D:\Program Files (x86)\PICC\devices\16F1827.h           [01-Dec-11 14:35  CRC=B1B82A14]
+    IQS253.c                                                [22-Feb-14 18:51  CRC=E7A6AD13]
+    IQS253.h                                                [22-Feb-14 15:54  CRC=B96F2DBD]
+    PCA9554.c                                               [04-Jan-14 10:33  CRC=54547FB3]
+    PCA9554.h                                               [19-Jan-14 16:49  CRC=16DF1152]
+
+Source signature=4A940D5E
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F1827
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.STA
