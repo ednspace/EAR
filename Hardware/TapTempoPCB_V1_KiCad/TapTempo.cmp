@@ -1,0 +1,136 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/11/2014 9:17:09 PM
+
+BeginCmp
+TimeStamp = /545C31CA;
+Reference = C1;
+ValeurCmp = C;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545ACF5F;
+Reference = C2;
+ValeurCmp = .1uF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C302B;
+Reference = C3;
+ValeurCmp = C;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545ACEE7;
+Reference = D1;
+ValeurCmp = DIODE;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C2D6E;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /545AD463;
+Reference = P2;
+ValeurCmp = CONN_5;
+IdModule  = PIN_ARRAY_5x1;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C33CB;
+Reference = P3;
+ValeurCmp = CONN_6;
+IdModule  = PINHEAD1-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /5462A605;
+Reference = P4;
+ValeurCmp = CONN_1;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C2CD4;
+Reference = P5;
+ValeurCmp = CONN_1;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /545AF35E;
+Reference = Q1;
+ValeurCmp = 2N3904;
+IdModule  = SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /5462A503;
+Reference = R1;
+ValeurCmp = 10K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545AF5B7;
+Reference = R2;
+ValeurCmp = 100K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545ACED1;
+Reference = R3;
+ValeurCmp = 4.7K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C28E9;
+Reference = R4;
+ValeurCmp = 4.7K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545C28EF;
+Reference = R5;
+ValeurCmp = 4.7K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /545B75D4;
+Reference = RV1;
+ValeurCmp = POT;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /545AF73A;
+Reference = SW1;
+ValeurCmp = SPST;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /545B7D73;
+Reference = U1;
+ValeurCmp = MCP4725;
+IdModule  = SOT-23-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /545AF249;
+Reference = U2;
+ValeurCmp = PIC12F1822;
+IdModule  = SOIC-8_N;
+EndCmp
+
+EndListe
