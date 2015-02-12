@@ -1,55 +1,65 @@
 
-ROM used: 654 (32%)
-          654 (32%) including unused fragments
+ROM used: 1876 (92%)
+          1876 (92%) including unused fragments
 
-          1 Average locations per line
-          10 Average locations per statement
+          3 Average locations per line
+          26 Average locations per statement
 
-RAM used: 30 (23%) at main() level
-          52 (41%) worst case
+RAM used: 44 (34%) at main() level
+          80 (62%) worst case
 
 Stack used: 3 worst case (out of 16 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  131    56  85  main.c
-  434     0   0  D:\Program Files (x86)\PICC\devices\12f1822.h
-   52    10  15  MCP4725.c
+  159    62  86  main.c
+  434     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\12f1822.h
+   52    10  14  MCP4725.c
    19     0   0  MCP4725.h
 ----- -----
-  636    66 Total
+  664    72 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     20   3   1   238  4.1  @I2C_WRITEU_1
-0     56   9   5   238  4.1  setVoltage
-0     19   3   0    78  2.8  timer2_isr
-0     52   8   0   320  3.7  ccp1_isr
-0    253  39   4  1253  7.2  MAIN
-0     38   6   5             @DIV1616
-0      5   1   0             @const97
-0     90  14   9             @PRINTF_LU_9600_93_93
-0     84  13   5             @PSTRINGCN7_9600_93_93
- Inline        0             @cinit1
+0     20   1   1             @I2C_WRITEU_1
+0     56   3   5   238  4.1  setVoltage
+0     21   1   0  1121 10.1  @const87
+0     41   2   0    78  2.8  @const89
+0     41   2   0    78  2.8  @const91
+0     19   1   0    78  2.8  timer2_isr
+0     52   3   0   320  3.7  ccp1_isr
+0    438  23   7  1525  8.2  MAIN
+0     38   2   5    43  2.1  @DIV1616
+0     28   1   4    44  1.9  @DTOF
+0    202  11  14   259  6.9  @DIVFF
+0    325  17  16             @ADDFF
+0     13   1   0             @const114
+ Inline       13  1071  8.0  @MULFF
+ Inline        5             @FTOSD
+0     76   4  13             @DIV3232
+0    353  19  13             @PRINTF_L32D_9600_93_93FPFPF
+0     84   4   5   979 10.0  @PSTRINGCN7_9600_93_93
+0     32   2   4   102  2.8  @SFTOI
+ Inline        0   150  5.1  @cinit1
 
 Program metrics:
-    Functions               5
-    Statements              66
-    Comments                163
-    Volume (V)              2839
-    Difficulty (D)          21.8
-    Effort to implement (E) 62005
-    Time to implement (T)   57 minutes
-    Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   8
-    Maintainability (MI)    123
+    Functions               14
+    Statements              72
+    Comments                168
+    Volume (V)              9341
+    Difficulty (D)          73.2
+    Effort to implement (E) 683630
+    Time to implement (T)   10 hours, 33 minutes
+    Est Delivered Bugs (B)  3
+    Cyclomatic Complexity   22
+    Maintainability (MI)    71
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     3  0  
 00003-00003     0  1  
 00004-00025    34  0  
-00026-007FF   617  1393  
+00026-007FF  1839  171  
 
 
 

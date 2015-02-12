@@ -8,10 +8,25 @@
 
 
 #include <MCP4725.c>
+//#include <math.h>
 
 //Variable Declaration
 int1 tap_return, got_pulse_width, first_press;
-int16 pulse_width_ms, ccp_delta, overflow,pot_val,pot_save,voltage_hold;
+int16 ccp_delta, overflow,pot_val,pot_save,voltage_hold;
+int32 pulse_width_ms;
+
+
+const int16 millisecond_delay[10] = {879,821,745,665,572,470,356,220,93,66};
+const float y_intercept[10] = {4.53,4.30,3.98,3.41,2.16,-0.59,-8.43,-35.11,-194.05,-303.50};
+const float slope[10] = {0.245,0.688,1.000,1.375,2.000,3.100,5.714,13.358,52.896,77.217};
+float calculated_voltage;
+float khz;
+int8 LUT_count;
+
+
+
+
+
 
 //Timer2 interrupts every ms basically just handles overflow condition
 //Stops counting up at 1000 to prevent eventually filling the overflow 
@@ -88,8 +103,7 @@ enable_interrupts(GLOBAL);
 
 //DAC Test Code
 //setVoltage(4095, FALSE); //Sets DAC output to Max voltage
-//setVoltage(0, FALSE); //Sets DAC output to Max voltage
-
+//setVoltage(0, FALSE); 
 
 
 while(1) 
@@ -110,11 +124,24 @@ while(1)
       enable_interrupts(GLOBAL);
       
       pulse_width_ms = local_ccp_delta / 62; //2E-6 per tick * 8 Prescale = 1.6E-5 so .001 / 1.6E-5 = 62.5 
-      setVoltage(4095-(pulse_width_ms * 4), FALSE); //This updates the DAC if TRUE it also updates eeprom
-      voltage_hold = 4095-(pulse_width_ms * 4);
+      //setVoltage(4095-(pulse_width_ms * 4), FALSE); //This updates the DAC if TRUE it also updates eeprom
+      //voltage_hold = 4095-(pulse_width_ms * 4);
       got_pulse_width = FALSE;
       
-      printf("%lu ms \n\r", pulse_width_ms); //Debug Message
+      LUT_count = 1;
+      while   (millisecond_delay[LUT_count] >= pulse_width_ms){
+      LUT_count = LUT_count + 1;
+      }
+      
+      kHz = 8192.0/(pulse_width_ms*2);
+      calculated_voltage = ((khz - y_intercept[LUT_count])/slope[LUT_count]);
+      calculated_voltage = calculated_voltage / .0012207;
+      
+      //printf("%lu ms \n\r", pulse_width_ms); //Debug Message
+      //printf("%lu kHz-new \n\r", kHz); //Debug Message
+      printf("%f calculated_voltage \n\r", calculated_voltage); //Debug Message
+      
+      setVoltage(calculated_voltage,FALSE);
      } 
      
   if(tap_return)

@@ -1,16 +1,16 @@
-CCS PCM C Compiler, Version 4.128, 51913               31-May-14 09:56
+CCS PCM C Compiler, Version 4.128, 51913               07-Feb-15 17:38
 
-               Filename: C:\Users\Customer\Dropbox\Pic_Programs\12F1822\Measure Incoming Tap Tempo Timer1 1 - Second Working\main.lst
+               Filename: D:\Projects\EAR\Firmware\12F1822\MeasureIncoming_Tap_Tempo_12F1822\main.lst
 
-               ROM used: 654 words (32%)
-                         Largest free fragment is 1393
-               RAM used: 30 (23%) at main() level
-                         52 (41%) worst case
+               ROM used: 1876 words (92%)
+                         Largest free fragment is 171
+               RAM used: 44 (34%) at main() level
+                         80 (62%) worst case
                Stack:    3 worst case (2 in main + 1 for interrupts)
 
 *
 0000:  MOVLP  00
-0001:  GOTO   192
+0001:  GOTO   59F
 0002:  NOP
 *
 0004:  CLRF   03
@@ -30,14 +30,14 @@ CCS PCM C Compiler, Version 4.128, 51913               31-May-14 09:56
 0012:  BTFSS  00.1
 0013:  GOTO   016
 0014:  BTFSC  11.1
-0015:  GOTO   026
+0015:  GOTO   08D
 0016:  CLRF   05
 0017:  MOVLW  91
 0018:  MOVWF  04
 0019:  BTFSS  00.2
 001A:  GOTO   01D
 001B:  BTFSC  11.2
-001C:  GOTO   039
+001C:  GOTO   0A0
 001D:  MOVF   24,W
 001E:  MOVWF  20
 001F:  MOVF   25,W
@@ -58,26 +58,26 @@ CCS PCM C Compiler, Version 4.128, 51913               31-May-14 09:56
 .................... #use rs232(baud=9600, UART2, ERRORS) 
 .................... #use i2c(master, sda=PIN_A2, scl=PIN_A1, FORCE_HW, FAST) 
 *
-0072:  MOVLB  04
-0073:  BCF    15.7
-0074:  MOVLB  00
-0075:  BCF    11.3
-0076:  MOVF   42,W
-0077:  MOVLB  04
-0078:  MOVWF  11
-0079:  MOVLW  02
-007A:  BTFSC  15.7
-007B:  GOTO   083
-007C:  MOVLB  00
-007D:  BTFSS  11.3
-007E:  GOTO   07D
-007F:  MOVLW  00
-0080:  MOVLB  04
-0081:  BTFSC  16.6
-0082:  MOVLW  01
-0083:  MOVLB  00
-0084:  MOVWF  21
-0085:  RETURN
+00E1:  MOVLB  04
+00E2:  BCF    15.7
+00E3:  MOVLB  00
+00E4:  BCF    11.3
+00E5:  MOVF   4D,W
+00E6:  MOVLB  04
+00E7:  MOVWF  11
+00E8:  MOVLW  02
+00E9:  BTFSC  15.7
+00EA:  GOTO   0F2
+00EB:  MOVLB  00
+00EC:  BTFSS  11.3
+00ED:  GOTO   0EC
+00EE:  MOVLW  00
+00EF:  MOVLB  04
+00F0:  BTFSC  16.6
+00F1:  MOVLW  01
+00F2:  MOVLB  00
+00F3:  MOVWF  21
+00F4:  RETURN
 .................... #byte APFCON=getenv("SFR:APFCON") //This is the register to move pins around 
 ....................  
 ....................  
@@ -133,86 +133,101 @@ CCS PCM C Compiler, Version 4.128, 51913               31-May-14 09:56
 .................... { 
 ....................    //disable_interrupts(GLOBAL);  
 ....................    i2c_start(); 
-0086:  MOVLB  04
-0087:  BSF    16.0
-0088:  BTFSC  16.0
-0089:  GOTO   088
+00F5:  MOVLB  04
+00F6:  BSF    16.0
+00F7:  BTFSC  16.0
+00F8:  GOTO   0F7
 ....................    i2c_write(DAC_address); 
-008A:  MOVLB  00
-008B:  MOVF   29,W
-008C:  MOVWF  42
-008D:  CALL   072
+00F9:  MOVLB  00
+00FA:  MOVF   29,W
+00FB:  MOVWF  4D
+00FC:  CALL   0E1
 ....................     
 ....................   if (writeEEPROM) 
-008E:  MOVF   3F,F
-008F:  BTFSC  03.2
-0090:  GOTO   095
+00FD:  MOVF   4A,F
+00FE:  BTFSC  03.2
+00FF:  GOTO   104
 ....................   { 
 ....................     i2c_write(MCP4725_CMD_WRITEDACEEPROM); 
-0091:  MOVLW  60
-0092:  MOVWF  42
-0093:  CALL   072
+0100:  MOVLW  60
+0101:  MOVWF  4D
+0102:  CALL   0E1
 ....................   } 
 ....................   else 
-0094:  GOTO   098
+0103:  GOTO   107
 ....................   { 
 ....................     i2c_write(MCP4725_CMD_WRITEDAC); 
-0095:  MOVLW  40
-0096:  MOVWF  42
-0097:  CALL   072
+0104:  MOVLW  40
+0105:  MOVWF  4D
+0106:  CALL   0E1
 ....................   } 
 ....................   i2c_write(output / 16);                   // Upper data bits          (D11.D10.D9.D8.D7.D6.D5.D4) 
-0098:  RRF    3E,W
-0099:  MOVWF  41
-009A:  RRF    3D,W
-009B:  MOVWF  40
-009C:  RRF    41,F
-009D:  RRF    40,F
-009E:  RRF    41,F
-009F:  RRF    40,F
-00A0:  RRF    41,F
-00A1:  RRF    40,F
-00A2:  MOVLW  0F
-00A3:  ANDWF  41,F
-00A4:  MOVF   40,W
-00A5:  MOVWF  42
-00A6:  CALL   072
+0107:  RRF    49,W
+0108:  MOVWF  4C
+0109:  RRF    48,W
+010A:  MOVWF  4B
+010B:  RRF    4C,F
+010C:  RRF    4B,F
+010D:  RRF    4C,F
+010E:  RRF    4B,F
+010F:  RRF    4C,F
+0110:  RRF    4B,F
+0111:  MOVLW  0F
+0112:  ANDWF  4C,F
+0113:  MOVF   4B,W
+0114:  MOVWF  4D
+0115:  CALL   0E1
 ....................   i2c_write((output % 16) << 4);            // Lower data bits          (D3.D2.D1.D0.x.x.x.x) 
-00A7:  MOVF   3D,W
-00A8:  ANDLW  0F
-00A9:  MOVWF  40
-00AA:  CLRF   41
-00AB:  RLF    40,F
-00AC:  RLF    41,F
-00AD:  RLF    40,F
-00AE:  RLF    41,F
-00AF:  RLF    40,F
-00B0:  RLF    41,F
-00B1:  RLF    40,F
-00B2:  RLF    41,F
-00B3:  MOVLW  F0
-00B4:  ANDWF  40,F
-00B5:  MOVF   40,W
-00B6:  MOVWF  42
-00B7:  CALL   072
+0116:  MOVF   48,W
+0117:  ANDLW  0F
+0118:  MOVWF  4B
+0119:  CLRF   4C
+011A:  RLF    4B,F
+011B:  RLF    4C,F
+011C:  RLF    4B,F
+011D:  RLF    4C,F
+011E:  RLF    4B,F
+011F:  RLF    4C,F
+0120:  RLF    4B,F
+0121:  RLF    4C,F
+0122:  MOVLW  F0
+0123:  ANDWF  4B,F
+0124:  MOVF   4B,W
+0125:  MOVWF  4D
+0126:  CALL   0E1
 ....................   i2c_stop();  
-00B8:  MOVLB  04
-00B9:  BSF    16.2
-00BA:  BTFSC  16.2
-00BB:  GOTO   0BA
+0127:  MOVLB  04
+0128:  BSF    16.2
+0129:  BTFSC  16.2
+012A:  GOTO   129
 ....................   //enable_interrupts(GLOBAL); 
 ....................    
 .................... } 
-00BC:  MOVLB  00
-00BD:  RETURN
+012B:  MOVLB  00
+012C:  RETURN
 ....................  
 ....................  
 ....................  
 ....................  
+.................... //#include <math.h> 
 ....................  
 .................... //Variable Declaration 
 .................... int1 tap_return, got_pulse_width, first_press; 
-.................... int16 pulse_width_ms, ccp_delta, overflow,pot_val,pot_save,voltage_hold; 
+.................... int16 ccp_delta, overflow,pot_val,pot_save,voltage_hold; 
+.................... int32 pulse_width_ms; 
+....................  
+....................  
+.................... const int16 millisecond_delay[10] = {879,821,745,665,572,470,356,220,93,66}; 
+.................... const float y_intercept[10] = {4.53,4.30,3.98,3.41,2.16,-0.59,-8.43,-35.11,-194.05,-303.50}; 
+.................... const float slope[10] = {0.245,0.688,1.000,1.375,2.000,3.100,5.714,13.358,52.896,77.217}; 
+.................... float calculated_voltage; 
+.................... float khz; 
+.................... int8 LUT_count; 
+....................  
+....................  
+....................  
+....................  
+....................  
 ....................  
 .................... //Timer2 interrupts every ms basically just handles overflow condition 
 .................... //Stops counting up at 1000 to prevent eventually filling the overflow  
@@ -222,442 +237,640 @@ CCS PCM C Compiler, Version 4.128, 51913               31-May-14 09:56
 .................... { 
 .................... if (overflow < 1000){ 
 *
-0026:  MOVF   30,W
-0027:  SUBLW  03
-0028:  BTFSS  03.0
-0029:  GOTO   034
-002A:  BTFSS  03.2
-002B:  GOTO   030
-002C:  MOVF   2F,W
-002D:  SUBLW  E7
-002E:  BTFSS  03.0
-002F:  GOTO   034
+008D:  MOVF   2E,W
+008E:  SUBLW  03
+008F:  BTFSS  03.0
+0090:  GOTO   09B
+0091:  BTFSS  03.2
+0092:  GOTO   097
+0093:  MOVF   2D,W
+0094:  SUBLW  E7
+0095:  BTFSS  03.0
+0096:  GOTO   09B
 ....................    overflow = overflow + 1; 
-0030:  MOVLW  01
-0031:  ADDWF  2F,F
-0032:  MOVLW  00
-0033:  ADDWFC 30,F
+0097:  MOVLW  01
+0098:  ADDWF  2D,F
+0099:  MOVLW  00
+009A:  ADDWFC 2E,F
 ....................    } 
 ....................     
 .................... clear_interrupt(int_timer2);// clear timer2 interrupt's flag  
-0034:  MOVF   07,W
-0035:  BCF    11.1
+009B:  MOVF   07,W
+009C:  BCF    11.1
 .................... } 
 ....................  
-0036:  BCF    11.1
-0037:  MOVLP  00
-0038:  GOTO   01D
+009D:  BCF    11.1
+009E:  MOVLP  00
+009F:  GOTO   01D
 .................... #int_ccp1  
 .................... void ccp1_isr(void)  
 .................... {  
 .................... static int16 t1_falling_edge; 
 *
-01B1:  MOVLB  00
-01B2:  CLRF   37
-01B3:  CLRF   38
+05BE:  MOVLB  00
+05BF:  CLRF   42
+05C0:  CLRF   43
 .................... if (overflow >= 900) //Set Overflow at 900ms can actually count to 1048 
 *
-0039:  MOVF   30,W
-003A:  SUBLW  02
-003B:  BTFSC  03.0
-003C:  GOTO   047
-003D:  XORLW  FF
-003E:  BTFSS  03.2
-003F:  GOTO   044
-0040:  MOVF   2F,W
-0041:  SUBLW  83
-0042:  BTFSC  03.0
-0043:  GOTO   047
+00A0:  MOVF   2E,W
+00A1:  SUBLW  02
+00A2:  BTFSC  03.0
+00A3:  GOTO   0AE
+00A4:  XORLW  FF
+00A5:  BTFSS  03.2
+00A6:  GOTO   0AB
+00A7:  MOVF   2D,W
+00A8:  SUBLW  83
+00A9:  BTFSC  03.0
+00AA:  GOTO   0AE
 ....................    { 
 ....................    first_press = TRUE; //Restart the Tap Train on next falling edge 
-0044:  BSF    2A.2
+00AB:  BSF    2A.2
 ....................    got_pulse_width = FALSE; //Don't report pulse width if overflow 
-0045:  BCF    2A.1
+00AC:  BCF    2A.1
 ....................    tap_return = TRUE; 
-0046:  BSF    2A.0
+00AD:  BSF    2A.0
 ....................    } 
 .................... if(first_press)  
-0047:  BTFSS  2A.2
-0048:  GOTO   055
+00AE:  BTFSS  2A.2
+00AF:  GOTO   0BC
 ....................   {  
 ....................    overflow = 0; //Reset the Overflow 
-0049:  CLRF   30
-004A:  CLRF   2F
+00B0:  CLRF   2E
+00B1:  CLRF   2D
 ....................    t1_falling_edge = CCP_1; //Capture the clock 
-004B:  MOVLB  05
-004C:  MOVF   12,W
-004D:  MOVLB  00
-004E:  MOVWF  38
-004F:  MOVLB  05
-0050:  MOVF   11,W
-0051:  MOVLB  00
-0052:  MOVWF  37
+00B2:  MOVLB  05
+00B3:  MOVF   12,W
+00B4:  MOVLB  00
+00B5:  MOVWF  43
+00B6:  MOVLB  05
+00B7:  MOVF   11,W
+00B8:  MOVLB  00
+00B9:  MOVWF  42
 ....................    first_press = FALSE; 
-0053:  BCF    2A.2
+00BA:  BCF    2A.2
 ....................   }  
 .................... else  
-0054:  GOTO   06A
+00BB:  GOTO   0D1
 ....................   { 
 ....................    ccp_delta = CCP_1 - t1_falling_edge; 
-0055:  MOVF   37,W
-0056:  MOVLB  05
-0057:  SUBWF  11,W
-0058:  MOVLB  00
-0059:  MOVWF  2D
-005A:  MOVF   38,W
-005B:  MOVLB  05
-005C:  SUBWFC 12,W
-005D:  MOVLB  00
-005E:  MOVWF  2E
+00BC:  MOVF   42,W
+00BD:  MOVLB  05
+00BE:  SUBWF  11,W
+00BF:  MOVLB  00
+00C0:  MOVWF  2B
+00C1:  MOVF   43,W
+00C2:  MOVLB  05
+00C3:  SUBWFC 12,W
+00C4:  MOVLB  00
+00C5:  MOVWF  2C
 ....................    t1_falling_edge = CCP_1; //Re Capture the clock 
-005F:  MOVLB  05
-0060:  MOVF   12,W
-0061:  MOVLB  00
-0062:  MOVWF  38
-0063:  MOVLB  05
-0064:  MOVF   11,W
-0065:  MOVLB  00
-0066:  MOVWF  37
+00C6:  MOVLB  05
+00C7:  MOVF   12,W
+00C8:  MOVLB  00
+00C9:  MOVWF  43
+00CA:  MOVLB  05
+00CB:  MOVF   11,W
+00CC:  MOVLB  00
+00CD:  MOVWF  42
 ....................    overflow = 0; //Reset the Overflow 
-0067:  CLRF   30
-0068:  CLRF   2F
+00CE:  CLRF   2E
+00CF:  CLRF   2D
 ....................    got_pulse_width = TRUE; 
-0069:  BSF    2A.1
+00D0:  BSF    2A.1
 ....................   }  
 ....................  
 .................... }  
 ....................  
 .................... //====================================  
-006A:  BCF    11.2
-006B:  MOVLP  00
-006C:  GOTO   01D
+00D1:  BCF    11.2
+00D2:  MOVLP  00
+00D3:  GOTO   01D
 .................... void main()  
 .................... {  
 *
-0192:  CLRF   05
-0193:  CLRF   04
-0194:  MOVLW  1F
-0195:  ANDWF  03,F
-0196:  MOVLW  62
-0197:  MOVLB  01
-0198:  MOVWF  19
-0199:  MOVLB  00
-019A:  CLRF   28
-019B:  MOVLW  0C
-019C:  MOVLB  03
-019D:  MOVWF  1B
-019E:  MOVLW  A6
-019F:  MOVWF  1E
-01A0:  MOVLW  90
-01A1:  MOVWF  1D
-01A2:  MOVLB  01
-01A3:  BSF    0C.1
-01A4:  BSF    0C.2
-01A5:  MOVLW  01
-01A6:  MOVLB  04
-01A7:  MOVWF  12
-01A8:  MOVLW  28
-01A9:  MOVWF  15
-01AA:  BCF    14.7
-01AB:  BCF    14.6
-01AC:  MOVLB  03
-01AD:  CLRF   0C
-01AE:  MOVLB  02
-01AF:  CLRF   12
-01B0:  CLRF   11
+059F:  CLRF   05
+05A0:  CLRF   04
+05A1:  MOVLW  1F
+05A2:  ANDWF  03,F
+05A3:  MOVLW  62
+05A4:  MOVLB  01
+05A5:  MOVWF  19
+05A6:  MOVLB  00
+05A7:  CLRF   28
+05A8:  MOVLW  0C
+05A9:  MOVLB  03
+05AA:  MOVWF  1B
+05AB:  MOVLW  A6
+05AC:  MOVWF  1E
+05AD:  MOVLW  90
+05AE:  MOVWF  1D
+05AF:  MOVLB  01
+05B0:  BSF    0C.1
+05B1:  BSF    0C.2
+05B2:  MOVLW  01
+05B3:  MOVLB  04
+05B4:  MOVWF  12
+05B5:  MOVLW  28
+05B6:  MOVWF  15
+05B7:  BCF    14.7
+05B8:  BCF    14.6
+05B9:  MOVLB  03
+05BA:  CLRF   0C
+05BB:  MOVLB  02
+05BC:  CLRF   12
+05BD:  CLRF   11
 ....................  
 ....................  
 .................... int16 local_ccp_delta; 
 .................... got_pulse_width = FALSE;  
 *
-01B4:  BCF    2A.1
+05C1:  BCF    2A.1
 .................... first_press = TRUE; 
-01B5:  BSF    2A.2
+05C2:  BSF    2A.2
 ....................  
 .................... DAC_address = 0xC4; //Address of the DAC don't ever forget this please 
-01B6:  MOVLW  C4
-01B7:  MOVWF  29
+05C3:  MOVLW  C4
+05C4:  MOVWF  29
 ....................  
 .................... //Oscillator Config 
 .................... //setup_oscillator(OSC_8MHZ|OSC_NORMAL|OSC_PLL_ON); //I am giving it all shes got, she can't take any more Captain 
 .................... //setup_oscillator(OSC_500KHZ|OSC_INTRC|OSC_PLL_OFF);  //Can measure a little over 4 seconds with timer1 
 .................... setup_oscillator(OSC_2MHZ|OSC_INTRC|OSC_PLL_OFF);  //Can measure a little over 1 second with timer1 
-01B8:  MOVLW  62
-01B9:  MOVLB  01
-01BA:  MOVWF  19
+05C5:  MOVLW  62
+05C6:  MOVLB  01
+05C7:  MOVWF  19
 ....................  
 .................... //Capture Compare Config 
 .................... setup_CCP1(CCP_CAPTURE_FE); //Sets up Capture Compare for Falling Edge - Reads Tap Input 
-01BB:  MOVLB  02
-01BC:  BCF    1D.0
-01BD:  BCF    1D.1
-01BE:  MOVLB  01
-01BF:  BSF    0C.2
-01C0:  MOVLB  05
-01C1:  CLRF   13
-01C2:  MOVLW  04
-01C3:  MOVWF  13
-01C4:  CLRF   14
-01C5:  CLRF   15
-01C6:  BCF    1E.0
-01C7:  BCF    1E.1
-01C8:  MOVLW  01
-01C9:  MOVWF  16
+05C8:  MOVLB  02
+05C9:  BCF    1D.0
+05CA:  BCF    1D.1
+05CB:  MOVLB  01
+05CC:  BSF    0C.2
+05CD:  MOVLB  05
+05CE:  CLRF   13
+05CF:  MOVLW  04
+05D0:  MOVWF  13
+05D1:  CLRF   14
+05D2:  CLRF   15
+05D3:  BCF    1E.0
+05D4:  BCF    1E.1
+05D5:  MOVLW  01
+05D6:  MOVWF  16
 .................... bit_set(APFCON,0); //Set CCP1 Pin to A5 instead of A2 
-01CA:  MOVLB  02
-01CB:  BSF    1D.0
+05D7:  MOVLB  02
+05D8:  BSF    1D.0
 ....................  
 .................... //ADC Config 
 .................... SETUP_ADC(ADC_CLOCK_INTERNAL); 
-01CC:  MOVLB  01
-01CD:  BSF    1E.4
-01CE:  BSF    1E.5
-01CF:  BCF    1E.6
-01D0:  BSF    1E.7
-01D1:  BSF    1D.0
+05D9:  MOVLB  01
+05DA:  BSF    1E.4
+05DB:  BSF    1E.5
+05DC:  BCF    1E.6
+05DD:  BSF    1E.7
+05DE:  BSF    1D.0
 .................... SETUP_ADC_PORTS(sAN3); //Analog in on RA4 
-01D2:  BCF    1E.0
-01D3:  BCF    1E.1
-01D4:  MOVLW  10
-01D5:  MOVLB  03
-01D6:  MOVWF  0C
-01D7:  MOVLW  00
-01D8:  MOVWF  0E
+05DF:  BCF    1E.0
+05E0:  BCF    1E.1
+05E1:  MOVLW  10
+05E2:  MOVLB  03
+05E3:  MOVWF  0C
+05E4:  MOVLW  00
+05E5:  MOVWF  0E
 .................... set_adc_channel(3); 
-01D9:  MOVLW  0C
-01DA:  MOVLB  00
-01DB:  MOVWF  21
-01DC:  MOVLB  01
-01DD:  MOVF   1D,W
-01DE:  ANDLW  83
-01DF:  MOVLB  00
-01E0:  IORWF  21,W
-01E1:  MOVLB  01
-01E2:  MOVWF  1D
+05E6:  MOVLW  0C
+05E7:  MOVLB  00
+05E8:  MOVWF  21
+05E9:  MOVLB  01
+05EA:  MOVF   1D,W
+05EB:  ANDLW  83
+05EC:  MOVLB  00
+05ED:  IORWF  21,W
+05EE:  MOVLB  01
+05EF:  MOVWF  1D
 .................... delay_us(10); 
-01E3:  GOTO   1E4
-01E4:  GOTO   1E5
-01E5:  NOP
+05F0:  GOTO   5F1
+05F1:  GOTO   5F2
+05F2:  NOP
 ....................  
 ....................  
 ....................  
 .................... setup_timer_1(T1_INTERNAL | T1_DIV_BY_8 );  
-01E6:  MOVLB  02
-01E7:  BCF    1D.3
-01E8:  MOVLW  35
-01E9:  MOVLB  00
-01EA:  MOVWF  18
-01EB:  CLRF   19
+05F3:  MOVLB  02
+05F4:  BCF    1D.3
+05F5:  MOVLW  35
+05F6:  MOVLB  00
+05F7:  MOVWF  18
+05F8:  CLRF   19
 .................... setup_timer_2(T2_DIV_BY_16 , 31, 1);  //Need a real understanding of what this lines does here 
-01EC:  MOVLW  00
-01ED:  MOVWF  21
-01EE:  IORLW  06
-01EF:  MOVWF  1C
-01F0:  MOVLW  1F
-01F1:  MOVWF  1B
+05F9:  MOVLW  00
+05FA:  MOVWF  21
+05FB:  IORLW  06
+05FC:  MOVWF  1C
+05FD:  MOVLW  1F
+05FE:  MOVWF  1B
 .................... enable_interrupts(INT_CCP1); 
-01F2:  MOVLB  01
-01F3:  BSF    11.2
+05FF:  MOVLB  01
+0600:  BSF    11.2
 .................... enable_interrupts(INT_TIMER2); 
-01F4:  BSF    11.1
+0601:  BSF    11.1
 .................... enable_interrupts(GLOBAL); 
-01F5:  MOVLW  C0
-01F6:  IORWF  0B,F
+0602:  MOVLW  C0
+0603:  IORWF  0B,F
 ....................  
 .................... //DAC Test Code 
 .................... //setVoltage(4095, FALSE); //Sets DAC output to Max voltage 
 .................... //setVoltage(0, FALSE); //Sets DAC output to Max voltage 
 ....................  
-....................  
+.................... //printf("Working... \n\r"); //Debug Message 
 ....................  
 .................... while(1)  
 ....................   {  
 ....................   pot_val = read_adc(); 
-01F7:  BSF    1D.1
-01F8:  BTFSC  1D.1
-01F9:  GOTO   1F8
-01FA:  MOVF   1C,W
-01FB:  MOVLB  00
-01FC:  MOVWF  23
-01FD:  MOVLB  01
-01FE:  MOVF   1B,W
-01FF:  MOVLB  00
-0200:  MOVWF  31
-0201:  MOVF   23,W
-0202:  MOVWF  32
+0604:  BSF    1D.1
+0605:  BTFSC  1D.1
+0606:  GOTO   605
+0607:  MOVF   1C,W
+0608:  MOVLB  00
+0609:  MOVWF  23
+060A:  MOVLB  01
+060B:  MOVF   1B,W
+060C:  MOVLB  00
+060D:  MOVWF  2F
+060E:  MOVF   23,W
+060F:  MOVWF  30
 ....................   if ((pot_val > pot_save + 6) || (pot_val < pot_save-6)){  
-0203:  MOVLW  06
-0204:  ADDWF  33,W
-0205:  MOVWF  21
-0206:  MOVLW  00
-0207:  ADDWFC 34,W
-0208:  MOVWF  23
-0209:  MOVF   23,W
-020A:  SUBWF  32,W
-020B:  BTFSS  03.0
-020C:  GOTO   213
-020D:  BTFSS  03.2
-020E:  GOTO   225
-020F:  MOVF   31,W
-0210:  SUBWF  21,W
-0211:  BTFSS  03.0
-0212:  GOTO   225
-0213:  MOVLW  06
-0214:  SUBWF  33,W
-0215:  MOVWF  20
-0216:  MOVLW  00
-0217:  SUBWFC 34,W
-0218:  MOVWF  23
-0219:  MOVF   20,W
-021A:  MOVWF  21
-021B:  MOVF   32,W
-021C:  SUBWF  23,W
-021D:  BTFSS  03.0
-021E:  GOTO   235
-021F:  BTFSS  03.2
-0220:  GOTO   225
-0221:  MOVF   21,W
-0222:  SUBWF  31,W
-0223:  BTFSC  03.0
-0224:  GOTO   235
+0610:  MOVLW  06
+0611:  ADDWF  31,W
+0612:  MOVWF  21
+0613:  MOVLW  00
+0614:  ADDWFC 32,W
+0615:  MOVWF  23
+0616:  MOVF   23,W
+0617:  SUBWF  30,W
+0618:  BTFSS  03.0
+0619:  GOTO   620
+061A:  BTFSS  03.2
+061B:  GOTO   632
+061C:  MOVF   2F,W
+061D:  SUBWF  21,W
+061E:  BTFSS  03.0
+061F:  GOTO   632
+0620:  MOVLW  06
+0621:  SUBWF  31,W
+0622:  MOVWF  20
+0623:  MOVLW  00
+0624:  SUBWFC 32,W
+0625:  MOVWF  23
+0626:  MOVF   20,W
+0627:  MOVWF  21
+0628:  MOVF   30,W
+0629:  SUBWF  23,W
+062A:  BTFSS  03.0
+062B:  GOTO   642
+062C:  BTFSS  03.2
+062D:  GOTO   632
+062E:  MOVF   21,W
+062F:  SUBWF  2F,W
+0630:  BTFSC  03.0
+0631:  GOTO   642
 ....................       pot_save = pot_val; 
-0225:  MOVF   32,W
-0226:  MOVWF  34
-0227:  MOVF   31,W
-0228:  MOVWF  33
+0632:  MOVF   30,W
+0633:  MOVWF  32
+0634:  MOVF   2F,W
+0635:  MOVWF  31
 ....................       pot_val = pot_val * 4; //scale to 12bit DAC 
-0229:  RLF    31,F
-022A:  RLF    32,F
-022B:  RLF    31,F
-022C:  RLF    32,F
-022D:  MOVLW  FC
-022E:  ANDWF  31,F
+0636:  RLF    2F,F
+0637:  RLF    30,F
+0638:  RLF    2F,F
+0639:  RLF    30,F
+063A:  MOVLW  FC
+063B:  ANDWF  2F,F
 ....................       setVoltage(pot_val, FALSE); 
-022F:  MOVF   32,W
-0230:  MOVWF  3E
-0231:  MOVF   31,W
-0232:  MOVWF  3D
-0233:  CLRF   3F
-0234:  CALL   086
+063C:  MOVF   30,W
+063D:  MOVWF  49
+063E:  MOVF   2F,W
+063F:  MOVWF  48
+0640:  CLRF   4A
+0641:  CALL   0F5
 ....................   } 
 ....................   
 ....................     
 ....................    
 ....................   if(got_pulse_width)  
-0235:  BTFSS  2A.1
-0236:  GOTO   283
+0642:  BTFSS  2A.1
+0643:  GOTO   749
 ....................      {  
 ....................       disable_interrupts(GLOBAL);  
-0237:  BCF    0B.6
-0238:  BCF    0B.7
-0239:  BTFSC  0B.7
-023A:  GOTO   238
+0644:  BCF    0B.6
+0645:  BCF    0B.7
+0646:  BTFSC  0B.7
+0647:  GOTO   645
 ....................       local_ccp_delta = ccp_delta;   
-023B:  MOVF   2E,W
-023C:  MOVWF  3A
-023D:  MOVF   2D,W
-023E:  MOVWF  39
+0648:  MOVF   2C,W
+0649:  MOVWF  45
+064A:  MOVF   2B,W
+064B:  MOVWF  44
 ....................       enable_interrupts(GLOBAL); 
-023F:  MOVLW  C0
-0240:  IORWF  0B,F
+064C:  MOVLW  C0
+064D:  IORWF  0B,F
 ....................        
 ....................       pulse_width_ms = local_ccp_delta / 62; //2E-6 per tick * 8 Prescale = 1.6E-5 so .001 / 1.6E-5 = 62.5  
-0241:  MOVF   3A,W
-0242:  MOVWF  3C
-0243:  MOVF   39,W
-0244:  MOVWF  3B
-0245:  CLRF   3E
-0246:  MOVLW  3E
-0247:  MOVWF  3D
-0248:  GOTO   0BE
-0249:  MOVF   22,W
-024A:  MOVWF  2C
-024B:  MOVF   21,W
-024C:  MOVWF  2B
-....................       setVoltage(4095-(pulse_width_ms * 4), FALSE); //This updates the DAC if TRUE it also updates eeprom 
-024D:  RLF    2B,W
-024E:  MOVWF  22
-024F:  RLF    2C,W
-0250:  MOVWF  23
-0251:  RLF    22,F
-0252:  RLF    23,F
-0253:  MOVLW  FC
-0254:  ANDWF  22,F
-0255:  MOVF   22,W
-0256:  SUBLW  FF
-0257:  MOVWF  3B
-0258:  MOVLW  0F
-0259:  MOVWF  3C
-025A:  MOVF   23,W
-025B:  SUBWFC 3C,F
-025C:  MOVF   3C,W
-025D:  MOVWF  3E
-025E:  MOVF   3B,W
-025F:  MOVWF  3D
-0260:  CLRF   3F
-0261:  CALL   086
-....................       voltage_hold = 4095-(pulse_width_ms * 4); 
-0262:  RLF    2B,W
-0263:  MOVWF  22
-0264:  RLF    2C,W
-0265:  MOVWF  23
-0266:  RLF    22,F
-0267:  RLF    23,F
-0268:  MOVLW  FC
-0269:  ANDWF  22,F
-026A:  MOVF   22,W
-026B:  SUBLW  FF
-026C:  MOVWF  35
-026D:  MOVLW  0F
-026E:  MOVWF  36
-026F:  MOVF   23,W
-0270:  SUBWFC 36,F
+064E:  MOVF   45,W
+064F:  MOVWF  47
+0650:  MOVF   44,W
+0651:  MOVWF  46
+0652:  CLRF   49
+0653:  MOVLW  3E
+0654:  MOVWF  48
+0655:  GOTO   12D
+0656:  CLRF   38
+0657:  CLRF   37
+0658:  MOVF   22,W
+0659:  MOVWF  36
+065A:  MOVF   21,W
+065B:  MOVWF  35
+....................       //setVoltage(4095-(pulse_width_ms * 4), FALSE); //This updates the DAC if TRUE it also updates eeprom 
+....................       //voltage_hold = 4095-(pulse_width_ms * 4); 
 ....................       got_pulse_width = FALSE; 
-0271:  BCF    2A.1
+065C:  BCF    2A.1
 ....................        
-....................       printf("%lu ms \n\r", pulse_width_ms); //Debug Message 
-0272:  MOVLW  10
-0273:  MOVWF  04
-0274:  MOVF   2C,W
-0275:  MOVWF  3C
-0276:  MOVF   2B,W
-0277:  MOVWF  3B
-0278:  GOTO   0E4
-0279:  MOVLW  6E
-027A:  MOVLB  03
-027B:  MOVWF  11
-027C:  MOVLW  00
-027D:  MOVWF  12
-027E:  BSF    03.0
-027F:  MOVLW  06
-0280:  MOVLB  00
-0281:  MOVWF  3B
-0282:  GOTO   13E
+....................       LUT_count = 1; 
+065D:  MOVLW  01
+065E:  MOVWF  41
+....................       while   (millisecond_delay[LUT_count] >= pulse_width_ms){ 
+065F:  BCF    03.0
+0660:  RLF    41,W
+0661:  MOVWF  46
+0662:  CALL   026
+0663:  MOVWF  20
+0664:  INCF   46,W
+0665:  CALL   026
+0666:  MOVWF  23
+0667:  MOVF   20,W
+0668:  MOVWF  46
+0669:  MOVF   23,W
+066A:  MOVWF  47
+066B:  MOVF   38,F
+066C:  BTFSS  03.2
+066D:  GOTO   67E
+066E:  MOVF   37,F
+066F:  BTFSS  03.2
+0670:  GOTO   67E
+0671:  MOVF   36,W
+0672:  SUBWF  47,W
+0673:  BTFSS  03.0
+0674:  GOTO   67E
+0675:  BTFSS  03.2
+0676:  GOTO   67B
+0677:  MOVF   35,W
+0678:  SUBWF  46,W
+0679:  BTFSS  03.0
+067A:  GOTO   67E
+....................       LUT_count = LUT_count + 1; 
+067B:  MOVLW  01
+067C:  ADDWF  41,F
+....................       } 
+067D:  GOTO   65F
+....................        
+....................       kHz = 8192.0/(pulse_width_ms*2); 
+067E:  BCF    03.0
+067F:  RLF    35,W
+0680:  MOVWF  20
+0681:  RLF    36,W
+0682:  MOVWF  21
+0683:  RLF    37,W
+0684:  MOVWF  22
+0685:  RLF    38,W
+0686:  MOVWF  23
+0687:  MOVWF  49
+0688:  MOVF   22,W
+0689:  MOVWF  48
+068A:  MOVF   21,W
+068B:  MOVWF  47
+068C:  MOVF   20,W
+068D:  MOVWF  46
+068E:  GOTO   153
+068F:  CLRF   4D
+0690:  CLRF   4C
+0691:  CLRF   4B
+0692:  MOVLW  8C
+0693:  MOVWF  4A
+0694:  MOVF   23,W
+0695:  MOVWF  51
+0696:  MOVF   22,W
+0697:  MOVWF  50
+0698:  MOVF   21,W
+0699:  MOVWF  4F
+069A:  MOVF   20,W
+069B:  MOVWF  4E
+069C:  CALL   16F
+069D:  MOVF   23,W
+069E:  MOVWF  40
+069F:  MOVF   22,W
+06A0:  MOVWF  3F
+06A1:  MOVF   21,W
+06A2:  MOVWF  3E
+06A3:  MOVF   20,W
+06A4:  MOVWF  3D
+....................       calculated_voltage = ((khz - y_intercept[LUT_count])/slope[LUT_count]); 
+06A5:  RLF    41,W
+06A6:  MOVWF  20
+06A7:  RLF    20,F
+06A8:  MOVLW  FC
+06A9:  ANDWF  20,F
+06AA:  MOVF   20,W
+06AB:  MOVWF  46
+06AC:  MOVLW  03
+06AD:  ADDWF  46,F
+06AE:  MOVF   46,W
+06AF:  CALL   03B
+06B0:  MOVWF  23
+06B1:  DECF   46,F
+06B2:  MOVF   46,W
+06B3:  CALL   03B
+06B4:  MOVWF  22
+06B5:  DECF   46,F
+06B6:  MOVF   46,W
+06B7:  CALL   03B
+06B8:  MOVWF  21
+06B9:  DECF   46,W
+06BA:  CALL   03B
+06BB:  MOVWF  20
+06BC:  BSF    03.1
+06BD:  MOVF   40,W
+06BE:  MOVWF  49
+06BF:  MOVF   3F,W
+06C0:  MOVWF  48
+06C1:  MOVF   3E,W
+06C2:  MOVWF  47
+06C3:  MOVF   3D,W
+06C4:  MOVWF  46
+06C5:  MOVF   23,W
+06C6:  MOVWF  4D
+06C7:  MOVF   22,W
+06C8:  MOVWF  4C
+06C9:  MOVF   21,W
+06CA:  MOVWF  4B
+06CB:  MOVF   20,W
+06CC:  MOVWF  4A
+06CD:  GOTO   239
+06CE:  MOVF   20,W
+06CF:  MOVWF  46
+06D0:  MOVF   21,W
+06D1:  MOVWF  47
+06D2:  MOVF   22,W
+06D3:  MOVWF  48
+06D4:  MOVF   23,W
+06D5:  MOVWF  49
+06D6:  RLF    41,W
+06D7:  MOVWF  20
+06D8:  RLF    20,F
+06D9:  MOVLW  FC
+06DA:  ANDWF  20,F
+06DB:  MOVF   20,W
+06DC:  MOVWF  4A
+06DD:  MOVLW  03
+06DE:  ADDWF  4A,F
+06DF:  MOVF   4A,W
+06E0:  CALL   064
+06E1:  MOVWF  23
+06E2:  DECF   4A,F
+06E3:  MOVF   4A,W
+06E4:  CALL   064
+06E5:  MOVWF  22
+06E6:  DECF   4A,F
+06E7:  MOVF   4A,W
+06E8:  CALL   064
+06E9:  MOVWF  21
+06EA:  DECF   4A,W
+06EB:  CALL   064
+06EC:  MOVWF  20
+06ED:  MOVF   49,W
+06EE:  MOVWF  4D
+06EF:  MOVF   48,W
+06F0:  MOVWF  4C
+06F1:  MOVF   47,W
+06F2:  MOVWF  4B
+06F3:  MOVF   46,W
+06F4:  MOVWF  4A
+06F5:  MOVF   23,W
+06F6:  MOVWF  51
+06F7:  MOVF   22,W
+06F8:  MOVWF  50
+06F9:  MOVF   21,W
+06FA:  MOVWF  4F
+06FB:  MOVF   20,W
+06FC:  MOVWF  4E
+06FD:  CALL   16F
+06FE:  MOVF   23,W
+06FF:  MOVWF  3C
+0700:  MOVF   22,W
+0701:  MOVWF  3B
+0702:  MOVF   21,W
+0703:  MOVWF  3A
+0704:  MOVF   20,W
+0705:  MOVWF  39
+....................       calculated_voltage = calculated_voltage / .0012207; 
+0706:  MOVF   3C,W
+0707:  MOVWF  4D
+0708:  MOVF   3B,W
+0709:  MOVWF  4C
+070A:  MOVF   3A,W
+070B:  MOVWF  4B
+070C:  MOVF   39,W
+070D:  MOVWF  4A
+070E:  MOVLW  E5
+070F:  MOVWF  51
+0710:  MOVLW  FF
+0711:  MOVWF  50
+0712:  MOVLW  1F
+0713:  MOVWF  4F
+0714:  MOVLW  75
+0715:  MOVWF  4E
+0716:  CALL   16F
+0717:  MOVF   23,W
+0718:  MOVWF  3C
+0719:  MOVF   22,W
+071A:  MOVWF  3B
+071B:  MOVF   21,W
+071C:  MOVWF  3A
+071D:  MOVF   20,W
+071E:  MOVWF  39
+....................        
+....................       //printf("%lu ms \n\r", pulse_width_ms); //Debug Message 
+....................       //printf("%lu kHz-new \n\r", kHz); //Debug Message 
+....................       printf("%f calculated_voltage \n\r", calculated_voltage); //Debug Message 
+071F:  MOVLW  89
+0720:  MOVWF  04
+0721:  MOVF   3C,W
+0722:  MOVWF  49
+0723:  MOVF   3B,W
+0724:  MOVWF  48
+0725:  MOVF   3A,W
+0726:  MOVWF  47
+0727:  MOVF   39,W
+0728:  MOVWF  46
+0729:  MOVLW  02
+072A:  MOVWF  4A
+072B:  GOTO   3CA
+072C:  MOVLW  D5
+072D:  MOVLB  03
+072E:  MOVWF  11
+072F:  MOVLW  00
+0730:  MOVWF  12
+0731:  BCF    03.0
+0732:  MOVLW  16
+0733:  MOVLB  00
+0734:  MOVWF  46
+0735:  GOTO   52B
+....................        
+....................       setVoltage(calculated_voltage,FALSE); 
+0736:  MOVF   3C,W
+0737:  MOVWF  49
+0738:  MOVF   3B,W
+0739:  MOVWF  48
+073A:  MOVF   3A,W
+073B:  MOVWF  47
+073C:  MOVF   39,W
+073D:  MOVWF  46
+073E:  GOTO   57F
+073F:  MOVF   22,W
+0740:  MOVWF  47
+0741:  MOVF   21,W
+0742:  MOVWF  46
+0743:  MOVF   22,W
+0744:  MOVWF  49
+0745:  MOVF   21,W
+0746:  MOVWF  48
+0747:  CLRF   4A
+0748:  CALL   0F5
 ....................      }  
 ....................       
 ....................   if(tap_return) 
-0283:  BTFSS  2A.0
-0284:  GOTO   28C
+0749:  BTFSS  2A.0
+074A:  GOTO   752
 ....................      { 
 ....................      setVoltage(voltage_hold, FALSE); //Sets DAC to last good voltage returns tempo after moving knob 
-0285:  MOVF   36,W
-0286:  MOVWF  3E
-0287:  MOVF   35,W
-0288:  MOVWF  3D
-0289:  CLRF   3F
-028A:  CALL   086
+074B:  MOVF   34,W
+074C:  MOVWF  49
+074D:  MOVF   33,W
+074E:  MOVWF  48
+074F:  CLRF   4A
+0750:  CALL   0F5
 ....................      tap_return = FALSE; 
-028B:  BCF    2A.0
+0751:  BCF    2A.0
 ....................      } 
 ....................       
 ....................     
 ....................  
 ....................   }  
-028C:  MOVLB  01
-028D:  GOTO   1F7
+0752:  MOVLB  01
+0753:  GOTO   604
 ....................  
 .................... } 
-028E:  SLEEP
+0754:  SLEEP
 
 Configuration Fuses:
    Word  1: 3F84   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
