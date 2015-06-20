@@ -1,9 +1,9 @@
-Cmp-Mod V01 Created by Cvpcb (2014-10-27 BZR 5228)-product   date = 11/23/2014 12:29:35 PM
+Cmp-Mod V01 Created by Cvpcb (2014-10-27 BZR 5228)-product   date = 6/17/2015 8:32:15 AM
 
 BeginCmp
 TimeStamp = /545C31CA;
 Reference = C1;
-ValeurCmp = .1uF;
+ValeurCmp = 1uF;
 IdModule  = Capacitors_SMD:C_1206_HandSoldering;
 EndCmp
 
@@ -11,56 +11,119 @@ BeginCmp
 TimeStamp = /545ACF5F;
 Reference = C2;
 ValeurCmp = .1uF;
-IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+IdModule  = Capacitors_SMD:C_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545C302B;
 Reference = C3;
 ValeurCmp = .1uF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /55802664;
+Reference = C4;
+ValeurCmp = 1uF;
 IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /55816974;
+Reference = C5;
+ValeurCmp = .1uF;
+IdModule  = Capacitors_SMD:C_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545ACEE7;
 Reference = D1;
 ValeurCmp = DIODE;
-IdModule  = Diodes_SMD:Diode-SMA_Standard;
+IdModule  = Diodes_SMD:SOD-123;
 EndCmp
 
 BeginCmp
-TimeStamp = /545C2D6E;
+TimeStamp = /557F922E;
+Reference = J1;
+ValeurCmp = ISPTOUCH_PIC;
+IdModule  = My_Library:ICSP_TOUCH_AVX_9188_6-WAY_MATING_GUIDE;
+EndCmp
+
+BeginCmp
+TimeStamp = /557E1AA1;
 Reference = P1;
-ValeurCmp = CONN_2;
-IdModule  = Connect:SIL-2;
+ValeurCmp = PWR;
+IdModule  = My_Library:Castellation;
 EndCmp
 
 BeginCmp
-TimeStamp = /545AD463;
+TimeStamp = /557E1E53;
 Reference = P2;
-ValeurCmp = CONN_5;
-IdModule  = Connect:SIL-5;
+ValeurCmp = GND;
+IdModule  = My_Library:Castellation;
 EndCmp
 
 BeginCmp
-TimeStamp = /545C33CB;
+TimeStamp = /55801B0B;
 Reference = P3;
-ValeurCmp = CONN_6;
-IdModule  = Connect:SIL-6;
+ValeurCmp = CONN_01X02;
+IdModule  = Connect:PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /558064EC;
+Reference = P4;
+ValeurCmp = DAC;
+IdModule  = My_Library:Castellation;
 EndCmp
 
 BeginCmp
 TimeStamp = /5462A605;
-Reference = P4;
-ValeurCmp = CONN_1;
-IdModule  = Connect:SIL-1;
+Reference = P5;
+ValeurCmp = Gate;
+IdModule  = My_Library:Castellation;
 EndCmp
 
 BeginCmp
-TimeStamp = /545C2CD4;
-Reference = P5;
-ValeurCmp = CONN_1;
-IdModule  = Connect:SIL-1;
+TimeStamp = /557E3106;
+Reference = P6;
+ValeurCmp = Switch_1;
+IdModule  = My_Library:Castellation;
+EndCmp
+
+BeginCmp
+TimeStamp = /557E3190;
+Reference = P7;
+ValeurCmp = Switch_2;
+IdModule  = My_Library:Castellation;
+EndCmp
+
+BeginCmp
+TimeStamp = /557E3812;
+Reference = P8;
+ValeurCmp = High;
+IdModule  = My_Library:Castellation;
+EndCmp
+
+BeginCmp
+TimeStamp = /557E39F2;
+Reference = P9;
+ValeurCmp = Wiper;
+IdModule  = My_Library:Castellation;
+EndCmp
+
+BeginCmp
+TimeStamp = /557E3A52;
+Reference = P10;
+ValeurCmp = Low;
+IdModule  = My_Library:Castellation;
+EndCmp
+
+BeginCmp
+TimeStamp = /5580685E;
+Reference = P11;
+ValeurCmp = GND;
+IdModule  = My_Library:Castellation;
 EndCmp
 
 BeginCmp
@@ -74,49 +137,35 @@ BeginCmp
 TimeStamp = /5462A503;
 Reference = R1;
 ValeurCmp = 10K;
-IdModule  = Resistors_SMD:R_1206_HandSoldering;
+IdModule  = My_Library:R_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545AF5B7;
 Reference = R2;
 ValeurCmp = 100K;
-IdModule  = Resistors_SMD:R_1206_HandSoldering;
+IdModule  = My_Library:R_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545ACED1;
 Reference = R3;
 ValeurCmp = 4.7K;
-IdModule  = Resistors_SMD:R_1206_HandSoldering;
+IdModule  = My_Library:R_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545C28E9;
 Reference = R4;
 ValeurCmp = 4.7K;
-IdModule  = Resistors_SMD:R_1206_HandSoldering;
+IdModule  = My_Library:R_0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /545C28EF;
 Reference = R5;
 ValeurCmp = 4.7K;
-IdModule  = Resistors_SMD:R_1206_HandSoldering;
-EndCmp
-
-BeginCmp
-TimeStamp = /545B75D4;
-Reference = RV1;
-ValeurCmp = POT;
-IdModule  = Potentiometers:Potentiometer_Triwood_RM-065;
-EndCmp
-
-BeginCmp
-TimeStamp = /545AF73A;
-Reference = SW1;
-ValeurCmp = SPST;
-IdModule  = Discret:SW_PUSH_SMALL;
+IdModule  = My_Library:R_0805;
 EndCmp
 
 BeginCmp
@@ -131,6 +180,13 @@ TimeStamp = /545AF249;
 Reference = U2;
 ValeurCmp = PIC12F1822;
 IdModule  = SMD_Packages:SOIC-8-W;
+EndCmp
+
+BeginCmp
+TimeStamp = /55805A1F;
+Reference = U3;
+ValeurCmp = LDK220;
+IdModule  = Housings_SOT-23_SOT-143_TSOT-6:SOT-23-5;
 EndCmp
 
 EndListe

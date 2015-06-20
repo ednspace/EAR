@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name Limpkin)(type Legacy)(uri ${KIPRJMOD}\limpkins_lib.kicad_mod)(options "")(descr ""))
+  (lib (name ICSP)(type Legacy)(uri ${KIPRJMOD}\ICSP_Touch.kicad_mod)(options "")(descr ""))
+)
