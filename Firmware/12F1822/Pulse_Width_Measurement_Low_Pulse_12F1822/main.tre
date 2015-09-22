@@ -1,8 +1,0 @@
-ÀÄmain
-   ÃÄMAIN  0/112  Ram=5
-   ³  ÃÄ@cinit1  (Inline)  Ram=0
-   ³  ÃÄ??0??
-   ³  ÃÄ@PRINTF_LU_2400_93_93  0/90  Ram=9
-   ³  ÃÄ@PSTRINGCN7_2400_93_93  0/84  Ram=5
-   ³  ÀÄ@delay_ms1  0/16  Ram=1
-   ÀÄccp1_isr  0/61  Ram=0
