@@ -1,0 +1,159 @@
+004-005 @READ_PACKED_MEMORY.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+004     @WRITE_PROGRAM_MEMORY8.P3
+004-005 @WRITE_PACKED_MEMORY.P4
+006-007 @READ_PACKED_MEMORY.P1
+006-007 @WRITE_PACKED_MEMORY.P2
+020     @SCRATCH
+021     @SCRATCH
+021     _RETURN_
+022     @SCRATCH
+023     @SCRATCH
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     rs232_errors
+029     DAC_address
+02A.0   got_pulse_width
+02A.1   first_press
+02A.2   mode
+02B-02C ccp_delta
+02D-02E overflow
+02F-030 pot_val
+031-032 pot_save
+033-036 pulse_width_ms
+037-038 calculated_voltage
+039     LUT_count
+03A-03B ccp1_isr.t1_falling_edge
+03C-03D MAIN.local_ccp_delta
+03E-03F @DIV1616.P1
+03E-041 @DTOF.P2
+03E-041 @SFTOI.P3
+03E     MAIN.@SCRATCH1
+03F     MAIN.@SCRATCH2
+040-041 @DIV1616.P1
+040-041 setVoltage.output
+040     MAIN.@SCRATCH3
+041     MAIN.@SCRATCH4
+042     setVoltage.writeEEPROM
+042     MAIN.@SCRATCH5
+042     @DIV1616.@SCRATCH1
+043     setVoltage.@SCRATCH1
+043     MAIN.@SCRATCH6
+044     setVoltage.@SCRATCH2
+044     MAIN.@SCRATCH7
+045     @I2C_WRITEU_1.P1
+045     MAIN.@SCRATCH8
+046     MAIN.@SCRATCH9
+047     MAIN.@SCRATCH10
+048     MAIN.@SCRATCH11
+049     MAIN.@SCRATCH12
+04A     MAIN.@SCRATCH13
+04B     MAIN.@SCRATCH14
+04C     MAIN.@SCRATCH15
+04D     MAIN.@SCRATCH16
+04E-04F @ITOF.P1
+04E     MAIN.@SCRATCH17
+04F     MAIN.@SCRATCH18
+050     MAIN.@SCRATCH19
+051     MAIN.@SCRATCH20
+052-055 map.value
+056-059 map.x_min
+05A-05D map.x_max
+05E-061 map.y_min
+062-065 map.y_max
+066     map.@SCRATCH1
+067     map.@SCRATCH2
+068     map.@SCRATCH3
+069     map.@SCRATCH4
+06A-06D @ADDFF.P1
+06A-06D @DIVFF.P2
+06A-06D @MULFF.P3
+0A0-0A3 @DIVFF.P1
+0A0-0A3 @ADDFF.P2
+0A0-0A3 @MULFF.P3
+0A4     @ADDFF.@SCRATCH1
+0A4     @DIVFF.@SCRATCH1
+0A4     @MULFF.@SCRATCH1
+0A5     @ADDFF.@SCRATCH2
+0A5     @DIVFF.@SCRATCH2
+0A5     @MULFF.@SCRATCH2
+0A6     @ADDFF.@SCRATCH3
+0A6     @DIVFF.@SCRATCH3
+0A6     @MULFF.@SCRATCH3
+0A7     @ADDFF.@SCRATCH4
+0A7     @DIVFF.@SCRATCH4
+0A7     @MULFF.@SCRATCH4
+0A8     @ADDFF.@SCRATCH5
+0A8     @DIVFF.@SCRATCH5
+0A8     @MULFF.@SCRATCH5
+0A9     @ADDFF.@SCRATCH6
+0A9     @DIVFF.@SCRATCH6
+0AA     @ADDFF.@SCRATCH7
+0AB     @ADDFF.@SCRATCH8
+111.6   C1OUT
+11D     APFCON
+191-192 @READ_PROGRAM_MEMORY8.P1
+191-192 @WRITE_PROGRAM_MEMORY8.P2
+291     CCP_1
+291     CCP_1_LOW
+292     CCP_1_HIGH
+
+ROM Allocation:
+00C3  @I2C_WRITEU_1
+00D7  setVoltage
+0026  millisecond_delay
+0051  dac_out
+007C  timer2_isr
+008F  ccp1_isr
+02EE  map
+016E  @ADDFF
+0341  @DIVFF
+046A  @MULFF
+054C  MAIN
+010F  @DIV1616
+0135  @DTOF
+0151  @ITOF
+052C  @SFTOI
+054C  @cinit1
+056B  @cinit2
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    D:\Projects\EAR\Firmware\12F1822\Main_Code_Tap_Tempo_12F1822_V2\
+
+Project Files:
+    main.c                                                  [13-Sep-15 19:48  CRC=6CFA9C5D]
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\12f1822.h [19-Apr-14 10:06  CRC=BAC3681B]
+    MCP4725.c                                               [31-May-14 09:21  CRC=C84E9268]
+    MCP4725.h                                               [25-Apr-14 20:08  CRC=8EBB1B36]
+
+Source signature=0D82CD4C
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC12F1822
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.STA

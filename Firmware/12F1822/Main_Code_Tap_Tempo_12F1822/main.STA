@@ -1,0 +1,65 @@
+
+ROM used: 1876 (92%)
+          1876 (92%) including unused fragments
+
+          3 Average locations per line
+          26 Average locations per statement
+
+RAM used: 44 (34%) at main() level
+          80 (62%) worst case
+
+Stack used: 3 worst case (out of 16 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  159    62  86  main.c
+  434     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\12f1822.h
+   52    10  14  MCP4725.c
+   19     0   0  MCP4725.h
+----- -----
+  664    72 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20   1   1             @I2C_WRITEU_1
+0     56   3   5   238  4.1  setVoltage
+0     21   1   0             @const87
+0     41   2   0             @const89
+0     41   2   0             @const91
+0     19   1   0    78  2.8  timer2_isr
+0     52   3   0   320  3.7  ccp1_isr
+0    438  23   7  1525  8.2  MAIN
+0     38   2   5             @DIV1616
+0     28   1   4             @DTOF
+0    202  11  14             @DIVFF
+0    325  17  16             @ADDFF
+0     13   1   0             @const114
+ Inline       13             @MULFF
+ Inline        5             @FTOSD
+0     76   4  13             @DIV3232
+0    353  19  13             @PRINTF_L32D_9600_93_93FPFPF
+0     84   4   5             @PSTRINGCN7_9600_93_93
+0     32   2   4             @SFTOI
+ Inline        0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              72
+    Comments                167
+    Volume (V)              2717
+    Difficulty (D)          17.6
+    Effort to implement (E) 47784
+    Time to implement (T)   44 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   7
+    Maintainability (MI)    62
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     3  0  
+00003-00003     0  1  
+00004-00025    34  0  
+00026-007FF  1839  171  
+
+
+

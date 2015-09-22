@@ -1,0 +1,14 @@
+>>> Warning 203 "main.c" Line 112(1,1): Condition always TRUE
+>>> Warning 202 "main.c" Line 15(27,34): Variable never used:   pot_val
+>>> Warning 202 "main.c" Line 15(35,43): Variable never used:   pot_save
+>>> Warning 202 "main.c" Line 15(44,56): Variable never used:   voltage_hold
+>>> Warning 202 "main.c" Line 16(7,21): Variable never used:   pulse_width_ms
+>>> Warning 202 "main.c" Line 19(13,30): Variable never used:   millisecond_delay
+>>> Warning 202 "main.c" Line 20(13,24): Variable never used:   y_intercept
+>>> Warning 202 "main.c" Line 21(13,18): Variable never used:   slope
+>>> Warning 202 "main.c" Line 22(7,25): Variable never used:   calculated_voltage
+>>> Warning 202 "main.c" Line 23(7,10): Variable never used:   khz
+>>> Warning 202 "main.c" Line 24(6,15): Variable never used:   LUT_count
+>>> Warning 202 "main.c" Line 75(7,22): Variable never used:   local_ccp_delta
+      Memory usage:   ROM=30%      RAM=33% - 51%
+      0 Errors,  12 Warnings.

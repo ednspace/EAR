@@ -1,0 +1,164 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PACKED_MEMORY.P2
+004-005 @READ_PACKED_MEMORY.P3
+004     @WRITE_PROGRAM_MEMORY8.P4
+006-007 @READ_PACKED_MEMORY.P1
+006-007 @WRITE_PACKED_MEMORY.P2
+020     @SCRATCH
+021     @SCRATCH
+021     _RETURN_
+022     @SCRATCH
+023     @SCRATCH
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     rs232_errors
+029     DAC_address
+02A.0   tap_return
+02A.1   got_pulse_width
+02A.2   first_press
+02B-02C ccp_delta
+02D-02E overflow
+02F-030 pot_val
+031-032 pot_save
+033-034 voltage_hold
+035-038 pulse_width_ms
+039-03C calculated_voltage
+03D-040 khz
+041     LUT_count
+042-043 ccp1_isr.t1_falling_edge
+044-045 MAIN.local_ccp_delta
+046-049 @DTOF.P1
+046-049 @PRINTF_L32D_9600_93_93FPFPF.P2
+046-049 @SFTOI.P3
+046-047 @DIV1616.P4
+046     @PSTRINGCN7_9600_93_93.P5
+046-049 @ADDFF.P6
+046     MAIN.@SCRATCH1
+047     MAIN.@SCRATCH2
+047     @PSTRINGCN7_9600_93_93.@SCRATCH1
+048-049 @DIV1616.P1
+048-049 setVoltage.output
+048     MAIN.@SCRATCH3
+048     @PSTRINGCN7_9600_93_93.@SCRATCH2
+049     MAIN.@SCRATCH4
+049     @PSTRINGCN7_9600_93_93.@SCRATCH3
+04A     setVoltage.writeEEPROM
+04A     @PRINTF_L32D_9600_93_93FPFPF.P1
+04A-04D @ADDFF.P2
+04A-04D @DIVFF.P3
+04A     MAIN.@SCRATCH5
+04A     @DIV1616.@SCRATCH1
+04A     @PSTRINGCN7_9600_93_93.@SCRATCH4
+04B     setVoltage.@SCRATCH1
+04B     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH1
+04C     setVoltage.@SCRATCH2
+04C     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH2
+04D     @I2C_WRITEU_1.P1
+04D     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH3
+04E-051 @DIVFF.P1
+04E     @ADDFF.@SCRATCH1
+04E     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH4
+04F     @ADDFF.@SCRATCH2
+04F     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH5
+050     @ADDFF.@SCRATCH3
+050     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH6
+051     @ADDFF.@SCRATCH4
+051     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH7
+052     @DIVFF.@SCRATCH1
+052     @ADDFF.@SCRATCH5
+052     @PRINTF_L32D_9600_93_93FPFPF.@SCRATCH8
+053-056 @MULFF.P1
+053-056 @FTOSD.P2
+053-056 @DIV3232.P3
+053     @DIVFF.@SCRATCH2
+053     @ADDFF.@SCRATCH6
+054     @DIVFF.@SCRATCH3
+054     @ADDFF.@SCRATCH7
+055     @DIVFF.@SCRATCH4
+055     @ADDFF.@SCRATCH8
+056     @DIVFF.@SCRATCH5
+057-05A @MULFF.P1
+057-05A @DIV3232.P2
+057     @DIVFF.@SCRATCH6
+057     @FTOSD.@SCRATCH1
+05B     @MULFF.@SCRATCH1
+05B     @DIV3232.@SCRATCH1
+05C     @MULFF.@SCRATCH2
+05C     @DIV3232.@SCRATCH2
+05D     @MULFF.@SCRATCH3
+05D     @DIV3232.@SCRATCH3
+05E     @MULFF.@SCRATCH4
+05E     @DIV3232.@SCRATCH4
+05F     @MULFF.@SCRATCH5
+05F     @DIV3232.@SCRATCH5
+111.6   C1OUT
+11D     APFCON
+191-192 @READ_PROGRAM_MEMORY8.P1
+191-192 @WRITE_PROGRAM_MEMORY8.P2
+291     CCP_1
+291     CCP_1_LOW
+292     CCP_1_HIGH
+
+ROM Allocation:
+00E1  @I2C_WRITEU_1
+00F5  setVoltage
+0026  millisecond_delay
+003B  y_intercept
+0064  slope
+008D  timer2_isr
+00A0  ccp1_isr
+059F  MAIN
+012D  @DIV1616
+0153  @DTOF
+016F  @DIVFF
+0239  @ADDFF
+00D4  @const114
+03DE  @MULFF
+0464  @FTOSD
+037E  @DIV3232
+03CA  @PRINTF_L32D_9600_93_93FPFPF
+052B  @PSTRINGCN7_9600_93_93
+057F  @SFTOI
+059F  @cinit1
+05BE  @cinit2
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    D:\Projects\EAR\Firmware\12F1822\Main_Code_Tap_Tempo_12F1822\
+
+Project Files:
+    main.c                                                  [09-Sep-15 19:31  CRC=0A16A9A7]
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\12f1822.h [19-Apr-14 10:06  CRC=BAC3681B]
+    MCP4725.c                                               [31-May-14 09:21  CRC=C84E9268]
+    MCP4725.h                                               [25-Apr-14 20:08  CRC=8EBB1B36]
+
+Source signature=AA9EDA96
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC12F1822
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.STA

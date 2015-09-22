@@ -1,0 +1,158 @@
+CCS PCM C Compiler, Version 4.128, 51913               22-Jun-15 20:20
+
+               Filename: D:\Projects\EAR\Firmware\12F1822\Frequency Range Test\main.lst
+
+               ROM used: 75 words (4%)
+                         Largest free fragment is 1972
+               RAM used: 11 (9%) at main() level
+                         26 (20%) worst case
+               Stack:    1 worst case (0 in main + 1 for interrupts)
+
+*
+0000:  MOVLP  00
+0001:  GOTO   02A
+0002:  NOP
+*
+0004:  CLRF   03
+0005:  CLRF   0A
+0006:  MOVLB  00
+0007:  MOVF   20,W
+0008:  MOVWF  24
+0009:  MOVF   21,W
+000A:  MOVWF  25
+000B:  MOVF   22,W
+000C:  MOVWF  26
+000D:  MOVF   23,W
+000E:  MOVWF  27
+000F:  CLRF   05
+0010:  MOVLW  91
+0011:  MOVWF  04
+0012:  BTFSS  00.1
+0013:  GOTO   016
+0014:  BTFSC  11.1
+0015:  GOTO   01F
+0016:  MOVF   24,W
+0017:  MOVWF  20
+0018:  MOVF   25,W
+0019:  MOVWF  21
+001A:  MOVF   26,W
+001B:  MOVWF  22
+001C:  MOVF   27,W
+001D:  MOVWF  23
+001E:  RETFIE
+.................... #include <12f1822.h>   
+.................... //////// Standard Header file for the PIC12F1822 device //////////////// 
+.................... #device PIC12F1822 
+.................... #list 
+....................  
+.................... #fuses INTRC_IO,NOWDT,NOPROTECT,NOMCLR,NOCLKOUT,PLL_SW,NOLVP 
+.................... #DEVICE ADC=10 
+.................... #use delay (clock=32000000) 
+.................... //#use rs232(baud=9600, UART2, ERRORS) 
+.................... //#use i2c(master, sda=PIN_A2, scl=PIN_A1, FORCE_HW, FAST) 
+.................... //#byte APFCON=getenv("SFR:APFCON") //This is the register to move pins around 
+....................  
+....................  
+.................... int16 overflow; 
+....................  
+....................  
+....................  
+.................... //Timer2 interrupts every ms basically just handles overflow condition 
+.................... //Stops counting up at 1000 to prevent eventually filling the overflow  
+.................... //variable and rolling over back to 0 causing confusion 
+.................... #int_timer2 
+.................... void timer2_isr(void) 
+.................... { 
+....................  
+....................  output_toggle(PIN_A2);   
+001F:  MOVLB  01
+0020:  BCF    0C.2
+0021:  MOVLW  04
+0022:  MOVLB  02
+0023:  XORWF  0C,F
+.................... clear_interrupt(int_timer2);// clear timer2 interrupt's flag  
+0024:  MOVF   07,W
+0025:  MOVLB  00
+0026:  BCF    11.1
+.................... } 
+....................  
+.................... //====================================  
+0027:  BCF    11.1
+0028:  MOVLP  00
+0029:  GOTO   016
+.................... void main()  
+.................... {  
+002A:  CLRF   05
+002B:  CLRF   04
+002C:  MOVLW  1F
+002D:  ANDWF  03,F
+002E:  MOVLW  F0
+002F:  MOVLB  01
+0030:  MOVWF  19
+0031:  MOVLB  03
+0032:  CLRF   0C
+0033:  MOVLB  02
+0034:  CLRF   12
+0035:  CLRF   11
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... //Oscillator Config 
+....................  
+.................... setup_oscillator(OSC_8MHZ|OSC_INTRC|OSC_PLL_ON); //I am giving it all shes got, she can't take any more Captain 
+0036:  MOVLW  F2
+0037:  MOVLB  01
+0038:  MOVWF  19
+.................... //setup_oscillator(OSC_500KHZ|OSC_INTRC|OSC_PLL_OFF);  //Can measure a little over 4 seconds with timer1 
+.................... //setup_oscillator(OSC_2MHZ|OSC_INTRC|OSC_PLL_OFF);  //Can measure a little over 1 second with timer1 Use this one 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... setup_timer_1(T1_INTERNAL | T1_DIV_BY_8 );  
+0039:  MOVLB  02
+003A:  BCF    1D.3
+003B:  MOVLW  35
+003C:  MOVLB  00
+003D:  MOVWF  18
+003E:  CLRF   19
+.................... setup_timer_2(T2_DIV_BY_1, 10, 1);  //Need a real understanding of what this lines does here 
+003F:  MOVLW  00
+0040:  MOVWF  21
+0041:  IORLW  04
+0042:  MOVWF  1C
+0043:  MOVLW  0A
+0044:  MOVWF  1B
+.................... enable_interrupts(INT_CCP1); 
+0045:  MOVLB  01
+0046:  BSF    11.2
+.................... enable_interrupts(INT_TIMER2); 
+0047:  BSF    11.1
+.................... enable_interrupts(GLOBAL); 
+0048:  MOVLW  C0
+0049:  IORWF  0B,F
+....................  
+....................  
+....................  
+....................  
+.................... while(1)  
+....................   {  
+....................    
+....................   } 
+004A:  GOTO   04A
+....................   
+....................     
+....................       
+....................     
+....................  
+....................   }  
+....................  
+....................  
+004B:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F84   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT PLL_SW STVREN BORV19 NODEBUG NOLVP

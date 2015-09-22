@@ -1,0 +1,16 @@
+ÀÄmain
+   ÃÄMAIN  0/152  Ram=3
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ??0??
+   ³  ÃÄ@PSTRINGC7_9600_93_93  0/76  Ram=4
+   ³  ÃÄsetVoltage  0/57  Ram=5
+   ³  ³  ÃÄ@I2C_WRITEU_1  0/20  Ram=1
+   ³  ³  ÃÄ@I2C_WRITEU_1  0/20  Ram=1
+   ³  ³  ÃÄ@I2C_WRITEU_1  0/20  Ram=1
+   ³  ³  ÃÄ@I2C_WRITEU_1  0/20  Ram=1
+   ³  ³  ÀÄ@I2C_WRITEU_1  0/20  Ram=1
+   ³  ÃÄ@PRINTF_LU_9600_93_93  0/90  Ram=9
+   ³  ÃÄ@PSTRINGCN7_9600_93_93  0/84  Ram=5
+   ³  ÀÄ@delay_ms1  0/16  Ram=1
+   ÃÄtimer2_isr  0/19  Ram=0
+   ÀÄccp1_isr  0/52  Ram=0
