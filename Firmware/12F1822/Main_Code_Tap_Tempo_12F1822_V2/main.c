@@ -1,4 +1,9 @@
-#include <12f1822.h>  
+//This is the main working code for the TapTempo Project
+//It was delievered 10/6/2015 and said to be AWESOME
+//Time line of changes follow below...
+//10/8/2015 made commit to github
+
+#include <12f1822.h>
 #fuses INTRC_IO,NOWDT,NOPROTECT,NOMCLR,NOCLKOUT,PLL_SW,NOLVP
 #DEVICE ADC=10
 #use delay(clock=2000000)

@@ -115,17 +115,15 @@ mode = 1; //Start off in POT mode
 
 while(1) 
   { 
-  pot_val = read_adc();
+  pot_val = read_adc(); //Read the ADC everytime
+  
   if (mode == 1){ //We are in POT mode just set the value
       pot_save = pot_val;
       setVoltage(pot_val * 4, FALSE); //scale to 12bit DAC
   }
   
   if (((pot_val > pot_save + 10 && mode ==0)) || ((pot_val < pot_save - 10) && (mode == 0))){ //We are in TAP mode only set voltage if POT moves a lot
-      //pot_save = pot_val;
-      //pot_val = pot_val * 4; //scale to 12bit DAC
-      //setVoltage(pot_val, FALSE);
-      mode = 1; //Enter POT MODE
+      mode = 1; //Jump out of tap mode and enter pot mode
   }
  
    

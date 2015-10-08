@@ -128,12 +128,12 @@ Project Directory:
     D:\Projects\EAR\Firmware\12F1822\Main_Code_Tap_Tempo_12F1822_V2\
 
 Project Files:
-    main.c                                                  [13-Sep-15 19:48  CRC=6CFA9C5D]
+    main.c                                                  [08-Oct-15 19:26  CRC=ABAE6A16]
     ..\..\..\..\..\Program Files (x86)\PICC\devices\12f1822.h [19-Apr-14 10:06  CRC=BAC3681B]
     MCP4725.c                                               [31-May-14 09:21  CRC=C84E9268]
     MCP4725.h                                               [25-Apr-14 20:08  CRC=8EBB1B36]
 
-Source signature=0D82CD4C
+Source signature=4C369B05
 
 Units:
     main (main)
